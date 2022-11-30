@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/11/29 09:15:25.000.833,=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Project3PCH1.h</Transaction>
+    <Transaction>2022/11/29 09:15:26.000.111,=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2022/11/29 09:17:35.000.462,C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\ReaderHelper.cbproj=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Project3.cbproj</Transaction>
+    <Transaction>2022/11/29 09:17:35.000.457,C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\ReaderHelperPCH1.h=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Project3PCH1.h</Transaction>
+    <Transaction>2022/11/29 09:17:43.000.861,C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Main.dfm=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/11/29 09:17:43.000.861,C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Main.cpp=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2022/11/29 09:17:43.000.861,C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Main.h=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>2022/11/29 09:17:56.000.931,X:\1Second_Year\Course Project\Main.dfm=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Main.dfm</Transaction>
+    <Transaction>2022/11/29 09:17:56.000.931,X:\1Second_Year\Course Project\Main.cpp=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Main.cpp</Transaction>
+    <Transaction>2022/11/29 09:17:56.000.931,X:\1Second_Year\Course Project\Main.h=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\Main.h</Transaction>
+    <Transaction>2022/11/29 09:25:39.000.457,X:\1Second_Year\Course Project\ReaderHelperPCH1.h=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\ReaderHelperPCH1.h</Transaction>
+    <Transaction>2022/11/29 09:25:42.000.247,X:\1Second_Year\Course Project\ReaderHelper.cbproj=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\ReaderHelper.cbproj</Transaction>
+    <Transaction>2022/11/30 15:20:01.872,=X:\1Second_Year\Course Project\Unit1.pas</Transaction>
+    <Transaction>2022/11/30 15:20:16.783,=X:\1Second_Year\Course Project\Unit1.cpp</Transaction>
+    <Transaction>2022/11/30 15:20:23.351,X:\1Second_Year\Course Project\Welcome.dfm=X:\1Second_Year\Course Project\Unit1.dfm</Transaction>
+    <Transaction>2022/11/30 15:20:23.351,X:\1Second_Year\Course Project\Welcome.cpp=X:\1Second_Year\Course Project\Unit1.cpp</Transaction>
+    <Transaction>2022/11/30 15:20:23.351,X:\1Second_Year\Course Project\Welcome.h=X:\1Second_Year\Course Project\Unit1.h</Transaction>
+  </Transactions>
+</BorlandProject>

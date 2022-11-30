@@ -1,0 +1,54 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#include <windows.h>
+#pragma hdrstop
+#include <iostream>
+#include <ShlObj.h>
+#include <string>
+#include <direct.h>
+#include <sys/stat.h>
+
+#include "Main.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma link "AdvSmoothGauge"
+#pragma link "AdvSmoothProgressBar"
+#pragma link "AdvProgr"
+#pragma link "AdvCircularProgress"
+#pragma link "AdvProgressBar"
+#pragma resource "*.dfm"
+#pragma comment(lib, "shell32.lib")
+
+const char* mainFolder = "readerdata";
+
+TMainForm *MainForm;
+//---------------------------------------------------------------------------
+__fastcall TMainForm::TMainForm(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+void createAppFiles() {
+
+	bool isFirstLaunch;
+
+	struct stat sb;
+	if (stat(mainFolder, &sb) == 0) {
+		isFirstLaunch = false;
+		ShowMessage("Exists.");
+	}
+	else {
+		isFirstLaunch = true;
+		mkdir(mainFolder);
+        ShowMessage("Does not exists.");
+    }
+}
+
+void __fastcall TMainForm::FormCreate(TObject *Sender)
+{
+   createAppFiles();
+}
+//---------------------------------------------------------------------------
+
