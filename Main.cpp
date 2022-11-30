@@ -12,6 +12,7 @@
 #include <fstream>
 #include <ctime>
 #include <cmath>
+#include <vector>
 
 #include "Main.h"
 #include "Welcome.h"
@@ -33,10 +34,13 @@ const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
 const string preferenceFilePath = "preferences.readerdata";
 const string bookmarksFilePath = "bookmarks.readerdata";
+const string booksFilePath = "books.readerdata";
 const string appVersion = "0.0";
 
 int dailyGoal = 0;
 int currentGoalStat = 0;
+vector<string> bookNames;
+vector<string> bookmarks;
 
 TMainForm *MainForm;
 //---------------------------------------------------------------------------
@@ -97,21 +101,43 @@ void setSpinEdit(TSpinEdit *spinEdit) {
 	spinEdit->Value = currentGoalStat;
 }
 
-void openAndLoadBookMarks(TMemo *openAndLoadBookMarks) {
-
+void loadBooks() {
+	ifstream booksFile(mainFolder + "\\" + booksFilePath);
+	string line;
+	while (getline(booksFile, line)) {
+		bookNames.push_back(line);
+	}
+	booksFile.close();
 }
 
-void importBookMarks(TMemo *bookmarksMemo) {
-	fs::path filepath = string(mainFolder + "\\" + bookmarksFilePath);
-	bool filepathExists = fs::is_directory(filepath);
-	if (filepathExists) {
-		openAndLoadBookMarks(bookmarksMemo);
+void loadBookmarks() {
+	ifstream bookmarksFile(mainFolder + "\\" + bookmarksFilePath);
+	string line;
+	while (getline(bookmarksFile, line)) {
+		bookmarks.push_back(line);
 	}
-	else {
-		ofstream bookmarksFile(mainFolder + "\\" + bookmarksFilePath);
-		bookmarksFile.close();
-		bookmarksMemo->Lines->Add("Your bookmarks will appear here");
+	bookmarksFile.close();
+}
+
+void fillComboBox(TComboBox *comboBox) {
+    comboBox->Items->Clear();
+	for (int i = 0; i < bookNames.size(); i++) {
+        comboBox->Items->Add(bookNames[i].c_str());
+	}
+}
+
+void updateMemo(TMemo *bookmarksMemo) {
+	bookmarksMemo->Lines->Clear();
+	for (int i = 0; i < bookNames.size(); i++) {
+		bookmarksMemo->Lines->Add(("[" + bookNames[i] + "] Page: " + bookmarks[i]).c_str());
     }
+}
+
+void importBookMarks(TMemo *bookmarksMemo, TComboBox *comboBox) {
+	loadBooks();
+	loadBookmarks();
+	fillComboBox(comboBox);
+	updateMemo(bookmarksMemo);
 }
 
 void __fastcall TMainForm::FormCreate(TObject *Sender)
@@ -124,7 +150,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    getDailyGoal();
    setProgress(DailyProgressBar, ReportLabel1);
    setSpinEdit(LogNewEdit);
-   importBookMarks(BookmarksMemo);
+   importBookMarks(BookmarksMemo, BookList);
 }
 //---------------------------------------------------------------------------
 
@@ -132,6 +158,36 @@ void __fastcall TMainForm::LogNewEditChange(TObject *Sender)
 {
 	currentGoalStat = LogNewEdit->Value;
 	setProgress(DailyProgressBar, ReportLabel1);
+}
+//---------------------------------------------------------------------------
+
+void updateBookmarksFileData() {
+	ofstream bookmarksFile(mainFolder + "\\" + bookmarksFilePath);
+	for (int i = 0; i < bookmarks.size(); i++) {
+		bookmarksFile << bookmarks[i] << endl;
+	}
+    bookmarksFile.close();
+}
+
+void __fastcall TMainForm::BookListChange(TObject *Sender)
+{
+	BookmarkEdit->Text = bookmarks[BookList->ItemIndex].c_str();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::EditButtonClick(TObject *Sender)
+{
+	AnsiString output = BookmarkEdit->Text;
+	const size_t len = (output.Length() + 1) * sizeof(System::AnsiChar);
+	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
+	if (hMem) {
+		memcpy(GlobalLock(hMem), output.c_str(), len);
+	}
+	bookmarks[BookList->ItemIndex] = output.c_str();
+	updateMemo(BookmarksMemo);
+	updateBookmarksFileData();
+	BookList->ItemIndex = -1;
+    BookmarkEdit->Text = "";
 }
 //---------------------------------------------------------------------------
 

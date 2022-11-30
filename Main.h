@@ -32,8 +32,15 @@ __published:	// IDE-managed Components
 	TAdvSmoothProgressBar *DailyProgressBar;
 	TSpinEdit *LogNewEdit;
 	TMemo *BookmarksMemo;
+	TButton *AddButton;
+	TComboBox *BookList;
+	TEdit *BookmarkEdit;
+	TButton *EditButton;
+	TLabel *BookmarkLabel1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall LogNewEditChange(TObject *Sender);
+	void __fastcall BookListChange(TObject *Sender);
+	void __fastcall EditButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);

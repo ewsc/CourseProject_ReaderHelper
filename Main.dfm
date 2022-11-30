@@ -22,7 +22,9 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 345
-    ActivePage = BookmarksSheet
+    ActivePage = HistorySheet
+    MultiLine = True
+    ScrollOpposite = True
     TabOrder = 0
     object ActionsSheet: TTabSheet
       Caption = 'Actions'
@@ -90,7 +92,7 @@ object MainForm: TMainForm
         Left = 272
         Top = 40
         Width = 174
-        Height = 33
+        Height = 23
         MaxValue = 0
         MinValue = 0
         TabOrder = 1
@@ -101,14 +103,93 @@ object MainForm: TMainForm
     object BookmarksSheet: TTabSheet
       Caption = 'Bookmarks'
       ImageIndex = 2
+      object BookmarkLabel1: TLabel
+        Left = 0
+        Top = 5
+        Width = 92
+        Height = 24
+        Caption = 'Bookmarks'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
       object BookmarksMemo: TMemo
         Left = 0
-        Top = 3
+        Top = 35
         Width = 489
         Height = 166
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = []
         Lines.Strings = (
           'BookmarksMemo')
+        ParentFont = False
+        ReadOnly = True
         TabOrder = 0
+      end
+      object AddButton: TButton
+        Left = 414
+        Top = 216
+        Width = 75
+        Height = 25
+        Caption = 'Add New'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object BookList: TComboBox
+        Left = 0
+        Top = 217
+        Width = 145
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        Text = 'Select a book'
+        OnChange = BookListChange
+      end
+      object BookmarkEdit: TEdit
+        Left = 151
+        Top = 217
+        Width = 121
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = []
+        MaxLength = 3
+        NumbersOnly = True
+        ParentFont = False
+        TabOrder = 3
+      end
+      object EditButton: TButton
+        Left = 278
+        Top = 216
+        Width = 75
+        Height = 25
+        Caption = 'Edit'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        OnClick = EditButtonClick
       end
     end
     object HistorySheet: TTabSheet
