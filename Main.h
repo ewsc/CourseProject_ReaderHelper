@@ -17,6 +17,7 @@
 #include "W7Classes.hpp"
 #include "W7ProgressBars.hpp"
 #include <Vcl.Samples.Spin.hpp>
+#include <Vcl.Grids.hpp>
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
@@ -37,6 +38,7 @@ __published:	// IDE-managed Components
 	TEdit *BookmarkEdit;
 	TButton *EditButton;
 	TLabel *BookmarkLabel1;
+	TStringGrid *StringGrid1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall LogNewEditChange(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);

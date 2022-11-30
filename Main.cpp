@@ -5,8 +5,6 @@
 #pragma hdrstop
 #include <ShlObj.h>
 #include <string>
-#include <direct.h>
-#include <sys/stat.h>
 #include <filesystem>
 #include <iostream>
 #include <fstream>
@@ -16,19 +14,15 @@
 
 #include "Main.h"
 #include "Welcome.h"
+#include "Bookmarks.h"
+#include "Files.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "AdvSmoothGauge"
-#pragma link "AdvSmoothProgressBar"
-#pragma link "AdvProgr"
-#pragma link "AdvCircularProgress"
-#pragma link "AdvProgressBar"
 #pragma resource "*.dfm"
 #pragma comment(lib, "shell32.lib")
 
 using namespace std;
-namespace fs = std::filesystem;
 
 const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
@@ -42,6 +36,19 @@ int currentGoalStat = 0;
 vector<string> bookNames;
 vector<string> bookmarks;
 
+//Bookmarks.cpp
+void updateMemo(TMemo *bookmarksMemo);
+void importBookMarks(TMemo *bookmarksMemo, TComboBox *comboBox);
+void loadBookmarks();
+void loadBooks();
+void fillComboBox(TComboBox *comboBox);
+
+//Files.cpp
+void createLogFile();
+bool checkFirstLaunch();
+void updateBookmarksFileData();
+void getDailyGoal();
+
 TMainForm *MainForm;
 //---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner)
@@ -49,44 +56,6 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-
-void createLogFile() {
-	time_t now = time(0);
-	string launchTime = ctime(&now);
-
-	ofstream logFile(mainFolder + "\\" + logFilePath);
-	logFile << "ReaderHelper v." + appVersion << endl;
-	logFile << "Last Launched: " + launchTime;
-	logFile.close();
-}
-
-bool checkFirstLaunch() {
-
-	bool isFirstLaunch;
-	struct stat sb;
-
-	fs::path filepath = string(mainFolder + "\\" + logFilePath);
-	bool filepathExists = fs::is_directory(filepath.parent_path());
-	if (filepathExists) {
-		isFirstLaunch = false;
-	}
-	else {
-		isFirstLaunch = true;
-		fs::create_directory(mainFolder);
-	}
-	createLogFile();
-	return isFirstLaunch;
-}
-
-void getDailyGoal() {
-	ifstream preferenceFile(mainFolder + "\\" + preferenceFilePath);
-	string goals;
-	getline(preferenceFile, goals);
-	dailyGoal = StrToInt((goals).c_str());
-	getline(preferenceFile, goals);
-	currentGoalStat = StrToInt((goals).c_str());
-	preferenceFile.close();
-}
 
 void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel) {
 	double d_percentage = currentGoalStat / dailyGoal;
@@ -99,45 +68,6 @@ void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel) {
 
 void setSpinEdit(TSpinEdit *spinEdit) {
 	spinEdit->Value = currentGoalStat;
-}
-
-void loadBooks() {
-	ifstream booksFile(mainFolder + "\\" + booksFilePath);
-	string line;
-	while (getline(booksFile, line)) {
-		bookNames.push_back(line);
-	}
-	booksFile.close();
-}
-
-void loadBookmarks() {
-	ifstream bookmarksFile(mainFolder + "\\" + bookmarksFilePath);
-	string line;
-	while (getline(bookmarksFile, line)) {
-		bookmarks.push_back(line);
-	}
-	bookmarksFile.close();
-}
-
-void fillComboBox(TComboBox *comboBox) {
-    comboBox->Items->Clear();
-	for (int i = 0; i < bookNames.size(); i++) {
-        comboBox->Items->Add(bookNames[i].c_str());
-	}
-}
-
-void updateMemo(TMemo *bookmarksMemo) {
-	bookmarksMemo->Lines->Clear();
-	for (int i = 0; i < bookNames.size(); i++) {
-		bookmarksMemo->Lines->Add(("[" + bookNames[i] + "] Page: " + bookmarks[i]).c_str());
-    }
-}
-
-void importBookMarks(TMemo *bookmarksMemo, TComboBox *comboBox) {
-	loadBooks();
-	loadBookmarks();
-	fillComboBox(comboBox);
-	updateMemo(bookmarksMemo);
 }
 
 void __fastcall TMainForm::FormCreate(TObject *Sender)
@@ -160,14 +90,6 @@ void __fastcall TMainForm::LogNewEditChange(TObject *Sender)
 	setProgress(DailyProgressBar, ReportLabel1);
 }
 //---------------------------------------------------------------------------
-
-void updateBookmarksFileData() {
-	ofstream bookmarksFile(mainFolder + "\\" + bookmarksFilePath);
-	for (int i = 0; i < bookmarks.size(); i++) {
-		bookmarksFile << bookmarks[i] << endl;
-	}
-    bookmarksFile.close();
-}
 
 void __fastcall TMainForm::BookListChange(TObject *Sender)
 {

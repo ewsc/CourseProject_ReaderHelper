@@ -22,7 +22,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 345
-    ActivePage = HistorySheet
+    ActivePage = SettingsSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0
@@ -199,6 +199,15 @@ object MainForm: TMainForm
     object SettingsSheet: TTabSheet
       Caption = 'Settings'
       ImageIndex = 4
+      object StringGrid1: TStringGrid
+        Left = 0
+        Top = 0
+        Width = 489
+        Height = 321
+        RowCount = 2
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
     end
   end
 end
