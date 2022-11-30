@@ -22,10 +22,22 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 345
-    ActivePage = BookmarksSheet
+    ActivePage = ReportsSheet
     TabOrder = 0
     object ActionsSheet: TTabSheet
       Caption = 'Actions'
+    end
+    object BookmarksSheet: TTabSheet
+      Caption = 'Bookmarks'
+      ImageIndex = 2
+    end
+    object HistorySheet: TTabSheet
+      Caption = 'History'
+      ImageIndex = 3
+    end
+    object SettingsSheet: TTabSheet
+      Caption = 'Settings'
+      ImageIndex = 4
     end
     object ReportsSheet: TTabSheet
       Caption = 'Report'
@@ -97,27 +109,6 @@ object MainForm: TMainForm
         Value = 0
         OnChange = LogNewEditChange
       end
-    end
-    object BookmarksSheet: TTabSheet
-      Caption = 'Bookmarks'
-      ImageIndex = 2
-      object BookmarksMemo: TMemo
-        Left = 0
-        Top = 3
-        Width = 489
-        Height = 166
-        Lines.Strings = (
-          'BookmarksMemo')
-        TabOrder = 0
-      end
-    end
-    object HistorySheet: TTabSheet
-      Caption = 'History'
-      ImageIndex = 3
-    end
-    object SettingsSheet: TTabSheet
-      Caption = 'Settings'
-      ImageIndex = 4
     end
   end
 end

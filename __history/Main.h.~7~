@@ -16,24 +16,19 @@
 #include "AdvProgressBar.hpp"
 #include "W7Classes.hpp"
 #include "W7ProgressBars.hpp"
-#include <Vcl.Samples.Spin.hpp>
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
 	TPageControl *MainPageControl;
 	TTabSheet *ActionsSheet;
+	TTabSheet *ReportsSheet;
 	TTabSheet *BookmarksSheet;
 	TTabSheet *HistorySheet;
 	TTabSheet *SettingsSheet;
-	TTabSheet *ReportsSheet;
+	TW7ProgressBar *DailyProgress;
 	TLabel *ReportLabel1;
-	TLabel *ReportLabel2;
-	TAdvSmoothProgressBar *DailyProgressBar;
-	TSpinEdit *LogNewEdit;
-	TMemo *BookmarksMemo;
 	void __fastcall FormCreate(TObject *Sender);
-	void __fastcall LogNewEditChange(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);

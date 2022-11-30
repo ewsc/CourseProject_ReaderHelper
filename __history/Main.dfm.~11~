@@ -22,7 +22,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 345
-    ActivePage = BookmarksSheet
+    ActivePage = ReportsSheet
     TabOrder = 0
     object ActionsSheet: TTabSheet
       Caption = 'Actions'
@@ -37,42 +37,38 @@ object MainForm: TMainForm
         Height = 14
         Caption = 'Daily progress:'
       end
-      object ReportLabel2: TLabel
-        Left = 272
-        Top = 20
-        Width = 21
-        Height = 14
-        Caption = 'Log:'
-      end
-      object DailyProgressBar: TAdvSmoothProgressBar
+      object AdvSmoothProgressBar1: TAdvSmoothProgressBar
         Left = 3
         Top = 40
-        Width = 174
-        Height = 33
+        Width = 182
+        Height = 25
         Step = 10.000000000000000000
         Maximum = 100.000000000000000000
-        Appearance.BackGroundFill.Color = 15921906
-        Appearance.BackGroundFill.ColorTo = 15921906
+        Position = 20.000000000000000000
+        Appearance.Shadows = False
+        Appearance.Overlays = False
+        Appearance.BackGroundFill.Color = clWhite
+        Appearance.BackGroundFill.ColorTo = clWhite
         Appearance.BackGroundFill.ColorMirror = clNone
         Appearance.BackGroundFill.ColorMirrorTo = clNone
         Appearance.BackGroundFill.GradientType = gtVertical
         Appearance.BackGroundFill.GradientMirrorType = gtSolid
-        Appearance.BackGroundFill.BorderColor = clSilver
+        Appearance.BackGroundFill.BorderColor = 11250603
         Appearance.BackGroundFill.Rounding = 0
         Appearance.BackGroundFill.ShadowOffset = 0
         Appearance.BackGroundFill.Glow = gmNone
-        Appearance.ProgressFill.Color = clWhite
-        Appearance.ProgressFill.ColorTo = 13226453
+        Appearance.ProgressFill.Color = 14925219
+        Appearance.ProgressFill.ColorTo = clNone
         Appearance.ProgressFill.ColorMirror = clNone
         Appearance.ProgressFill.ColorMirrorTo = clNone
         Appearance.ProgressFill.GradientType = gtVertical
-        Appearance.ProgressFill.GradientMirrorType = gtVertical
-        Appearance.ProgressFill.BorderColor = clGray
+        Appearance.ProgressFill.GradientMirrorType = gtNone
+        Appearance.ProgressFill.BorderColor = 14925219
         Appearance.ProgressFill.Rounding = 0
         Appearance.ProgressFill.ShadowOffset = 0
         Appearance.ProgressFill.Glow = gmNone
         Appearance.Font.Charset = DEFAULT_CHARSET
-        Appearance.Font.Color = clWindowText
+        Appearance.Font.Color = 4474440
         Appearance.Font.Height = -11
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = []
@@ -83,33 +79,12 @@ object MainForm: TMainForm
         Appearance.ProgressFont.Style = []
         Appearance.ValueFormat = '%.0f%%'
         Version = '1.10.1.2'
-        UIStyle = tsOffice2003Classic
         TMSStyle = 0
-      end
-      object LogNewEdit: TSpinEdit
-        Left = 272
-        Top = 40
-        Width = 174
-        Height = 33
-        MaxValue = 0
-        MinValue = 0
-        TabOrder = 1
-        Value = 0
-        OnChange = LogNewEditChange
       end
     end
     object BookmarksSheet: TTabSheet
       Caption = 'Bookmarks'
       ImageIndex = 2
-      object BookmarksMemo: TMemo
-        Left = 0
-        Top = 3
-        Width = 489
-        Height = 166
-        Lines.Strings = (
-          'BookmarksMemo')
-        TabOrder = 0
-      end
     end
     object HistorySheet: TTabSheet
       Caption = 'History'
