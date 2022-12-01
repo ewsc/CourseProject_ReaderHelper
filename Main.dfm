@@ -22,7 +22,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 345
-    ActivePage = SettingsSheet
+    ActivePage = ReportsSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0
@@ -53,23 +53,25 @@ object MainForm: TMainForm
         Height = 33
         Step = 10.000000000000000000
         Maximum = 100.000000000000000000
-        Appearance.BackGroundFill.Color = 15921906
-        Appearance.BackGroundFill.ColorTo = 15921906
+        Appearance.Shadows = False
+        Appearance.Overlays = False
+        Appearance.BackGroundFill.Color = 16250613
+        Appearance.BackGroundFill.ColorTo = 16250613
         Appearance.BackGroundFill.ColorMirror = clNone
         Appearance.BackGroundFill.ColorMirrorTo = clNone
         Appearance.BackGroundFill.GradientType = gtVertical
         Appearance.BackGroundFill.GradientMirrorType = gtSolid
-        Appearance.BackGroundFill.BorderColor = clSilver
+        Appearance.BackGroundFill.BorderColor = 15000546
         Appearance.BackGroundFill.Rounding = 0
         Appearance.BackGroundFill.ShadowOffset = 0
         Appearance.BackGroundFill.Glow = gmNone
-        Appearance.ProgressFill.Color = clWhite
-        Appearance.ProgressFill.ColorTo = 13226453
+        Appearance.ProgressFill.Color = 16244937
+        Appearance.ProgressFill.ColorTo = clNone
         Appearance.ProgressFill.ColorMirror = clNone
         Appearance.ProgressFill.ColorMirrorTo = clNone
         Appearance.ProgressFill.GradientType = gtVertical
         Appearance.ProgressFill.GradientMirrorType = gtVertical
-        Appearance.ProgressFill.BorderColor = clGray
+        Appearance.ProgressFill.BorderColor = clNone
         Appearance.ProgressFill.Rounding = 0
         Appearance.ProgressFill.ShadowOffset = 0
         Appearance.ProgressFill.Glow = gmNone
@@ -85,7 +87,7 @@ object MainForm: TMainForm
         Appearance.ProgressFont.Style = []
         Appearance.ValueFormat = '%.0f%%'
         Version = '1.10.1.2'
-        UIStyle = tsOffice2003Classic
+        UIStyle = tsWindows10
         TMSStyle = 0
       end
       object LogNewEdit: TSpinEdit
@@ -195,19 +197,39 @@ object MainForm: TMainForm
     object HistorySheet: TTabSheet
       Caption = 'History'
       ImageIndex = 3
+      object HistoryLabel1: TLabel
+        Left = 3
+        Top = 5
+        Width = 59
+        Height = 24
+        Caption = 'History'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
+      object HistoryGrid: TStringGrid
+        Left = 3
+        Top = 48
+        Width = 489
+        Height = 270
+        DefaultColAlignment = taCenter
+        RowCount = 2
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ColWidths = (
+          64
+          64
+          64
+          64
+          64)
+      end
     end
     object SettingsSheet: TTabSheet
       Caption = 'Settings'
       ImageIndex = 4
-      object StringGrid1: TStringGrid
-        Left = 0
-        Top = 0
-        Width = 489
-        Height = 321
-        RowCount = 2
-        ScrollBars = ssVertical
-        TabOrder = 0
-      end
     end
   end
 end

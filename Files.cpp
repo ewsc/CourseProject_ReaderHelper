@@ -18,17 +18,10 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-extern vector<string> bookNames;
-extern vector<string> bookmarks;
+extern vector<userBook> userBooks;
+
 extern int dailyGoal;
 extern int currentGoalStat;
-
-const string mainFolder = "readerdata";
-const string logFilePath = "logs.readerdata";
-const string preferenceFilePath = "preferences.readerdata";
-const string bookmarksFilePath = "bookmarks.readerdata";
-const string booksFilePath = "books.readerdata";
-const string appVersion = "0.0";
 
 TForm2 *Form2;
 //---------------------------------------------------------------------------
@@ -37,13 +30,24 @@ __fastcall TForm2::TForm2(TComponent* Owner)
 {
 }
 
+string getNext(string currLine, int *index) {
+	*index += + 2;
+	string result = "";
+	while(currLine[*index] != ']') {
+		result = result + currLine[*index];
+		(*index)++;
+	}
+	return result;
+}
+
 void getDailyGoal() {
 	ifstream preferenceFile(mainFolder + "\\" + preferenceFilePath);
-	string goals;
-	getline(preferenceFile, goals);
-	dailyGoal = StrToInt((goals).c_str());
-	getline(preferenceFile, goals);
-	currentGoalStat = StrToInt((goals).c_str());
+	string line;
+	int prIndex = -1;
+	getline(preferenceFile, line);
+
+	dailyGoal = StrToInt((getNext(line, &prIndex)).c_str());
+	currentGoalStat = StrToInt((getNext(line, &prIndex)).c_str());
 	preferenceFile.close();
 }
 
@@ -53,7 +57,7 @@ void createLogFile() {
 
 	ofstream logFile(mainFolder + "\\" + logFilePath);
 	logFile << "ReaderHelper v." + appVersion << endl;
-	logFile << "Last Launched: " + launchTime;
+	logFile << "Last Launched: [" + launchTime + "]" << endl;
 	logFile.close();
 }
 
@@ -73,11 +77,43 @@ bool checkFirstLaunch() {
 	return isFirstLaunch;
 }
 
-void updateBookmarksFileData() {
-	ofstream bookmarksFile(mainFolder + "\\" + bookmarksFilePath);
-	for (int i = 0; i < bookmarks.size(); i++) {
-		bookmarksFile << bookmarks[i] << endl;
+void rewriteFileData() {
+	ofstream userDataFile(mainFolder + "\\" + userDataPath);
+	for (int i = 0; i < userBooks.size(); i++) {
+		string tempString = "[" + userBooks[i].bookName + "][" + to_string(userBooks[i].bookmark) + "][" + userBooks[i].startedReading + "][" + userBooks[i].finishedReading + "][" + "F" + "]";
+		userDataFile << tempString << endl;
 	}
-	bookmarksFile.close();
+	userDataFile.close();
+}
+
+void distributeString(string currLine) {
+	int index = -1;
+	string newBookName = getNext(currLine, &index);
+	string newBookmarkPage = getNext(currLine, &index);
+	string newStartedReading = getNext(currLine, &index);
+	string newFinishedReading = getNext(currLine, &index);
+	string finished_reading = getNext(currLine, &index);
+
+	userBook newBook;
+	newBook.bookName = newBookName;
+	newBook.bookmark = stoi(newBookmarkPage);
+	newBook.startedReading = newStartedReading;
+	newBook.finishedReading = newFinishedReading;
+	if (finished_reading == "F") {
+		newBook.isFinished = true;
+	}
+	else if (finished_reading == "N") {
+        newBook.isFinished = false;
+	}
+    userBooks.push_back(newBook);
+}
+
+void getUserData() {
+	ifstream userDataFile(mainFolder + "\\" + userDataPath);
+	string currLine;
+	while (getline(userDataFile, currLine)) {
+		distributeString(currLine);
+	}
+	userDataFile.close();
 }
 //---------------------------------------------------------------------------

@@ -31,8 +31,8 @@ void __fastcall TWelcomeForm::GoalEditChange(TObject *Sender)
 
 void addDataToFiles(int dailyGoal) {
 	ofstream preferenceFile(mainFolder + "\\" + preferenceFilePath);
-	preferenceFile << (dailyGoal) << endl;
-    preferenceFile << (0) << endl;
+	preferenceFile << "[" << (dailyGoal) << "]";
+	preferenceFile << "[" << (0) << "]";
 	preferenceFile.close();
 }
 
