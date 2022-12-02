@@ -47,6 +47,7 @@ bool checkFirstLaunch();
 void rewriteFileData();
 void getDailyGoal();
 void getUserData();
+void saveFilePref();
 
 TMainForm *MainForm;
 //---------------------------------------------------------------------------
@@ -61,13 +62,12 @@ void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel) {
 	d_percentage = ((double)currentGoalStat / dailyGoal);
 	d_percentage = d_percentage * 100;
 	int percentage = d_percentage;
-
 	progressBar->Position = percentage;
 	reportLabel->Caption = ("Daily progress: " + IntToStr(currentGoalStat) + " of " + IntToStr(dailyGoal) + " (" + percentage + "%)").c_str();
 }
 
-void setSpinEdit(TSpinEdit *spinEdit) {
-	spinEdit->Value = currentGoalStat;
+void setLogEdit(TEdit *edit) {
+	edit->Text = 1;
 }
 
 void setStringGrid(TStringGrid *grid, int clWidth) {
@@ -130,18 +130,12 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    getUserData();
    setStringGrid(HistoryGrid, HistorySheet->Width);
    setProgress(DailyProgressBar, ReportLabel1);
-   setSpinEdit(LogNewEdit);
+   setLogEdit(LogEdit);
    importBookMarks(BookmarksMemo, BookList);
    updateStringGrid(HistoryGrid);
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMainForm::LogNewEditChange(TObject *Sender)
-{
-	currentGoalStat = LogNewEdit->Value;
-	setProgress(DailyProgressBar, ReportLabel1);
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TMainForm::BookListChange(TObject *Sender)
 {
@@ -149,20 +143,43 @@ void __fastcall TMainForm::BookListChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMainForm::EditButtonClick(TObject *Sender)
-{
-	AnsiString output = BookmarkEdit->Text;
+string returnStr(AnsiString output) {
 	const size_t len = (output.Length() + 1) * sizeof(System::AnsiChar);
 	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
 	if (hMem) {
 		memcpy(GlobalLock(hMem), output.c_str(), len);
 	}
+	return output.c_str();
+}
 
+void __fastcall TMainForm::EditButtonClick(TObject *Sender)
+{
+	string output = returnStr(BookmarkEdit->Text);
 	userBooks[BookList->ItemIndex].bookmark = stoi(output.c_str());
 	updateMemo(BookmarksMemo);
 	rewriteFileData();
 	BookList->ItemIndex = -1;
     BookmarkEdit->Text = "";
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::LogUpButtonClick(TObject *Sender)
+{
+	string output = returnStr(LogEdit->Text);
+	currentGoalStat += stoi(output.c_str());
+	setLogEdit(LogEdit);
+	saveFilePref();
+	setProgress(DailyProgressBar, ReportLabel1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::LogDownButtonClick(TObject *Sender)
+{
+	string output = returnStr(LogEdit->Text);
+	currentGoalStat -= stoi(output.c_str());
+	setLogEdit(LogEdit);
+	saveFilePref();
+	setProgress(DailyProgressBar, ReportLabel1);
 }
 //---------------------------------------------------------------------------
 

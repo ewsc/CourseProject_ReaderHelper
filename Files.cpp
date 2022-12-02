@@ -40,6 +40,12 @@ string getNext(string currLine, int *index) {
 	return result;
 }
 
+void saveFilePref() {
+	ofstream preferenceFile(mainFolder + "\\" + preferenceFilePath);
+    preferenceFile << "[" << to_string(dailyGoal) << "][" << to_string(currentGoalStat) << "]";
+	preferenceFile.close();
+}
+
 void getDailyGoal() {
 	ifstream preferenceFile(mainFolder + "\\" + preferenceFilePath);
 	string line;

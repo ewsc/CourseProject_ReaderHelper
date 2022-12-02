@@ -38,7 +38,6 @@ __published:	// IDE-managed Components
 	TLabel *ReportLabel1;
 	TLabel *ReportLabel2;
 	TAdvSmoothProgressBar *DailyProgressBar;
-	TSpinEdit *LogNewEdit;
 	TMemo *BookmarksMemo;
 	TButton *AddButton;
 	TComboBox *BookList;
@@ -47,10 +46,15 @@ __published:	// IDE-managed Components
 	TLabel *BookmarkLabel1;
 	TStringGrid *HistoryGrid;
 	TLabel *HistoryLabel1;
+	TLabel *ReportLabel3;
+	TEdit *LogEdit;
+	TButton *LogUpButton;
+	TButton *LogDownButton;
 	void __fastcall FormCreate(TObject *Sender);
-	void __fastcall LogNewEditChange(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);
+	void __fastcall LogUpButtonClick(TObject *Sender);
+	void __fastcall LogDownButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
