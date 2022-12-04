@@ -10,6 +10,12 @@
 #include <Vcl.Grids.hpp>
 #include <Vcl.Samples.Spin.hpp>
 #include <Vcl.StdCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <System.ImageList.hpp>
+#include <Vcl.ImgList.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.ToolWin.hpp>
+#include <Vcl.Menus.hpp>
 #include <string>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -50,11 +56,28 @@ __published:	// IDE-managed Components
 	TEdit *LogEdit;
 	TButton *LogUpButton;
 	TButton *LogDownButton;
+	TImageList *MainImageList;
+	TToolBar *ToolBar1;
+	TMainMenu *MainMenu;
+	TMenuItem *FileButton;
+	TMenuItem *OpenButton;
+	TTabSheet *AddNewSheet;
+	TLabel *AddNewLabel1;
+	TEdit *BookNameEdit1;
+	TEdit *BookAuthorEdit1;
+	TComboBox *BookGenreComboBox;
+	TEdit *CustomBookGenre;
+	TLabel *AddNewLabel2;
+	TLabel *AddNewLabel3;
+	TLabel *AddNewLabel4;
+	TLabel *AddNewLabel5;
+	TButton *AddNewButton1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
 	void __fastcall LogDownButtonClick(TObject *Sender);
+	void __fastcall AddNewButton1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
@@ -74,6 +97,8 @@ extern const string appVersion;
 typedef struct userBook{
 	string bookName;
 	int bookmark;
+	string bookAuthor;
+    string genre;
 	string startedReading;
 	string finishedReading;
     bool isFinished;

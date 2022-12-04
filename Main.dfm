@@ -12,6 +12,7 @@ object MainForm: TMainForm
   Font.Height = -12
   Font.Name = 'Calibri'
   Font.Style = []
+  Menu = MainMenu
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
@@ -19,15 +20,98 @@ object MainForm: TMainForm
   TextHeight = 14
   object MainPageControl: TPageControl
     Left = 0
-    Top = 0
+    Top = -3
     Width = 500
     Height = 345
-    ActivePage = ReportsSheet
+    ActivePage = AddNewSheet
     MultiLine = True
     ScrollOpposite = True
-    TabOrder = 0
+    TabOrder = 1
     object ActionsSheet: TTabSheet
       Caption = 'Actions'
+    end
+    object AddNewSheet: TTabSheet
+      Caption = 'Add New'
+      ImageIndex = 5
+      object AddNewLabel1: TLabel
+        Left = 0
+        Top = 3
+        Width = 76
+        Height = 24
+        Caption = 'Add New'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
+      object AddNewLabel2: TLabel
+        Left = 0
+        Top = 36
+        Width = 93
+        Height = 14
+        Caption = 'Input book name'
+      end
+      object AddNewLabel3: TLabel
+        Left = 208
+        Top = 36
+        Width = 98
+        Height = 14
+        Caption = 'Input book author'
+      end
+      object AddNewLabel4: TLabel
+        Left = 0
+        Top = 100
+        Width = 93
+        Height = 14
+        Caption = 'Input book genre'
+      end
+      object AddNewLabel5: TLabel
+        Left = 167
+        Top = 123
+        Width = 11
+        Height = 14
+        Caption = 'or'
+      end
+      object BookNameEdit1: TEdit
+        Left = 0
+        Top = 56
+        Width = 145
+        Height = 22
+        TabOrder = 0
+      end
+      object BookAuthorEdit1: TEdit
+        Left = 208
+        Top = 56
+        Width = 145
+        Height = 22
+        TabOrder = 1
+      end
+      object BookGenreComboBox: TComboBox
+        Left = 208
+        Top = 120
+        Width = 145
+        Height = 22
+        TabOrder = 2
+        Text = 'Select genre'
+      end
+      object CustomBookGenre: TEdit
+        Left = 0
+        Top = 120
+        Width = 145
+        Height = 22
+        TabOrder = 3
+      end
+      object AddNewButton1: TButton
+        Left = 278
+        Top = 168
+        Width = 75
+        Height = 25
+        Caption = 'Add'
+        TabOrder = 4
+        OnClick = AddNewButton1Click
+      end
     end
     object ReportsSheet: TTabSheet
       Caption = 'Report'
@@ -105,7 +189,8 @@ object MainForm: TMainForm
         Left = 272
         Top = 56
         Width = 121
-        Height = 24
+        Height = 22
+        NumbersOnly = True
         TabOrder = 1
         Text = 'LogEdit'
       end
@@ -239,7 +324,7 @@ object MainForm: TMainForm
       object HistoryGrid: TStringGrid
         Left = 3
         Top = 48
-        Width = 489
+        Width = 486
         Height = 270
         DefaultColAlignment = taCenter
         RowCount = 2
@@ -256,6 +341,28 @@ object MainForm: TMainForm
     object SettingsSheet: TTabSheet
       Caption = 'Settings'
       ImageIndex = 4
+    end
+  end
+  object ToolBar1: TToolBar
+    Left = 641
+    Top = 0
+    Width = 29
+    Height = 350
+    Align = alRight
+    TabOrder = 0
+  end
+  object MainImageList: TImageList
+    Left = 632
+    Top = 312
+  end
+  object MainMenu: TMainMenu
+    Left = 592
+    Top = 312
+    object FileButton: TMenuItem
+      Caption = 'File'
+      object OpenButton: TMenuItem
+        Caption = 'Open...'
+      end
     end
   end
 end

@@ -12,10 +12,14 @@
 #include <cmath>
 #include <vector>
 
+#include <chrono>
+#include <iomanip>
+
 #include "Main.h"
 #include "Welcome.h"
 #include "Bookmarks.h"
 #include "Files.h"
+#include "AddNew.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -24,6 +28,7 @@
 #pragma comment(lib, "shell32.lib")
 
 using namespace std;
+using namespace chrono;
 
 const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
@@ -49,6 +54,9 @@ void getDailyGoal();
 void getUserData();
 void saveFilePref();
 
+//AddNew.cpp
+void setAddNewComboBox(TComboBox *comboBox);
+
 TMainForm *MainForm;
 //---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner)
@@ -70,27 +78,25 @@ void setLogEdit(TEdit *edit) {
 	edit->Text = 1;
 }
 
-void setStringGrid(TStringGrid *grid, int clWidth) {
-    grid->Width = clWidth;
-	grid->ColWidths[0] = round(clWidth * 0.1);
-	grid->ColWidths[1] = round(clWidth * 0.3);
-	grid->ColWidths[2] = round(clWidth * 0.3);
-	grid->ColWidths[3] = round(clWidth * 0.3);
+void setStringGrid(TStringGrid *grid) {
+	grid->ColWidths[0] = round(grid->Width * 0.05);
+	grid->ColWidths[1] = round(grid->Width * 0.3);
+	grid->ColWidths[2] = round(grid->Width * 0.25);
+	grid->ColWidths[3] = round(grid->Width * 0.2);
+	grid->ColWidths[4] = round(grid->Width * 0.2);
 }
 
 void drawFixedRows(TStringGrid *grid) {
 	grid->Cells[0][0] = "#";
 	grid->Cells[1][0] = "Name";
-	grid->Cells[2][0] = "Started at";
-	grid->Cells[3][0] = "Finished at";
+	grid->Cells[2][0] = "Author";
+	grid->Cells[3][0] = "Genre";
+	grid->Cells[4][0] = "Finished";
 }
 
 void clearStringGrid(TStringGrid *grid) {
 	grid->RowCount = 2;
-	for (int i = 0; i < 4; i++) {
-		grid->Cells[i][1] = "";
-		grid->Cells[i][1] = "";
-		grid->Cells[i][1] = "";
+	for (int i = 0; i < 5; i++) {
 		grid->Cells[i][1] = "";
 	}
 }
@@ -101,21 +107,23 @@ void updateStringGrid(TStringGrid *grid) {
 	for (int i = 0; i < userBooks.size(); i++) {
 		grid->Cells[0][i+1] = i+1;
 		grid->Cells[1][i+1] = userBooks[i].bookName.c_str();
-		if (userBooks[i].startedReading == "0") {
-			grid->Cells[2][i+1] = "Not started yet";
-		}
-		else {
-			grid->Cells[2][i+1] = userBooks[i].startedReading.c_str();
-		}
+		grid->Cells[2][i+1] = userBooks[i].bookAuthor.c_str();
+		grid->Cells[3][i+1] = userBooks[i].genre.c_str();
 
-		if (userBooks[i].finishedReading == "0") {
-			grid->Cells[3][i+1] = "Not finished yet";
+		if (userBooks[i].isFinished) {
+			grid->Cells[4][i+1] = "Still reading";
 		}
 		else {
-			grid->Cells[3][i+1] = userBooks[i].finishedReading.c_str();
+			grid->Cells[4][i+1] = userBooks[i].finishedReading.c_str();
 		}
         grid->RowCount += 1;
 	}
+}
+
+void updateDisplays(TComboBox *genreComboBox, TMemo *memo, TComboBox *booksComboBox, TStringGrid *historyGrid) {
+	setAddNewComboBox(genreComboBox);
+	importBookMarks(memo, booksComboBox);
+	updateStringGrid(historyGrid);
 }
 
 
@@ -128,11 +136,14 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    }
    getDailyGoal();
    getUserData();
-   setStringGrid(HistoryGrid, HistorySheet->Width);
+   setStringGrid(HistoryGrid);
    setProgress(DailyProgressBar, ReportLabel1);
+   //setAddNewComboBox(BookGenreComboBox);
    setLogEdit(LogEdit);
-   importBookMarks(BookmarksMemo, BookList);
-   updateStringGrid(HistoryGrid);
+   //importBookMarks(BookmarksMemo, BookList);
+   //updateStringGrid(HistoryGrid);
+
+   updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
 }
 //---------------------------------------------------------------------------
 
@@ -182,4 +193,42 @@ void __fastcall TMainForm::LogDownButtonClick(TObject *Sender)
 	setProgress(DailyProgressBar, ReportLabel1);
 }
 //---------------------------------------------------------------------------
+
+void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox) {
+	BookNameEdit1->Text = "";
+	BookAuthorEdit1->Text = "";
+	CustomBookGenre->Text = "";
+    BookGenreComboBox->ItemIndex = -1;
+}
+
+void __fastcall TMainForm::AddNewButton1Click(TObject *Sender)
+{
+	userBook newBook;
+	newBook.bookName = returnStr(BookNameEdit1->Text);
+	newBook.bookAuthor = returnStr(BookAuthorEdit1->Text);
+	if (CustomBookGenre->Text != "") {
+		newBook.genre = returnStr(CustomBookGenre->Text);
+	}
+	else {
+		newBook.genre = returnStr(BookGenreComboBox->Text);
+	}
+
+	time_t now = time(0);
+	string startedReadingTime = ctime(&now);
+
+	startedReadingTime[startedReadingTime.length() - 1] = '\0';
+	newBook.startedReading = startedReadingTime;
+
+	newBook.finishedReading = "0";
+	newBook.isFinished = false;
+    newBook.bookmark = 0;
+
+	userBooks.push_back(newBook);
+	rewriteFileData();
+	clearAllInputs(BookNameEdit1, BookAuthorEdit1, CustomBookGenre, BookGenreComboBox);
+	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+}
+//---------------------------------------------------------------------------
+
+
 

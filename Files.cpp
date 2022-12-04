@@ -86,7 +86,7 @@ bool checkFirstLaunch() {
 void rewriteFileData() {
 	ofstream userDataFile(mainFolder + "\\" + userDataPath);
 	for (int i = 0; i < userBooks.size(); i++) {
-		string tempString = "[" + userBooks[i].bookName + "][" + to_string(userBooks[i].bookmark) + "][" + userBooks[i].startedReading + "][" + userBooks[i].finishedReading + "][" + "F" + "]";
+		string tempString = "[" + userBooks[i].bookName + "][" + to_string(userBooks[i].bookmark) + "][" + userBooks[i].bookAuthor + "][" + userBooks[i].genre + "][" + userBooks[i].startedReading + "][" + userBooks[i].finishedReading + "][" + "F" + "]";
 		userDataFile << tempString << endl;
 	}
 	userDataFile.close();
@@ -96,6 +96,8 @@ void distributeString(string currLine) {
 	int index = -1;
 	string newBookName = getNext(currLine, &index);
 	string newBookmarkPage = getNext(currLine, &index);
+	string newBookAuthor = getNext(currLine, &index);
+	string newBookGenre = getNext(currLine, &index);
 	string newStartedReading = getNext(currLine, &index);
 	string newFinishedReading = getNext(currLine, &index);
 	string finished_reading = getNext(currLine, &index);
@@ -103,6 +105,8 @@ void distributeString(string currLine) {
 	userBook newBook;
 	newBook.bookName = newBookName;
 	newBook.bookmark = stoi(newBookmarkPage);
+	newBook.bookAuthor = newBookAuthor;
+    newBook.genre = newBookGenre;
 	newBook.startedReading = newStartedReading;
 	newBook.finishedReading = newFinishedReading;
 	if (finished_reading == "F") {
