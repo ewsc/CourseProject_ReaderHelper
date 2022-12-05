@@ -351,18 +351,19 @@ object MainForm: TMainForm
     Align = alRight
     TabOrder = 0
   end
-  object MainImageList: TImageList
-    Left = 632
-    Top = 312
-  end
   object MainMenu: TMainMenu
     Left = 592
-    Top = 312
+    Top = 280
     object FileButton: TMenuItem
       Caption = 'File'
       object OpenButton: TMenuItem
         Caption = 'Open...'
       end
     end
+  end
+  object MainApplicationEvents: TApplicationEvents
+    OnException = MainApplicationEventsException
+    Left = 592
+    Top = 232
   end
 end
