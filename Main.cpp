@@ -156,6 +156,7 @@ void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 		if (isDeleting) {
 			deleteRow(HistoryGrid);
 			updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+            rewriteFileData();
 		}
 	}
 }

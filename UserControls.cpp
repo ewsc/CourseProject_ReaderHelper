@@ -39,17 +39,26 @@ struct byGenre {
     }
 };
 
-bool genreIsAlreadyAdded() {
-	vector<userBook> duplicateVector;
-    duplicateVector = userBooks;
-	sort(duplicateVector.begin(), duplicateVector.end(), byGenre());
+bool genreIsAlreadyAdded(string compareStr) {
+    //ShowMessage(userBooks.size());
+	for (int i = 0; i < userBooks.size(); i++) {
+		if (userBooks[i].genre.compare(compareStr.c_str()) == 0) {
+            return true;
+        }
+    }
 	return false;
 }
 
 void setAddNewComboBox(TComboBox *comboBox) {
 	comboBox->Items->Clear();
+	bool isAlreadyAdded;
 	for (int i = 0; i < userBooks.size(); i++) {
-		bool isAlreadyAdded = genreIsAlreadyAdded();
+		if (i != 0) {
+			isAlreadyAdded = genreIsAlreadyAdded(userBooks[i].genre);
+		}
+		else {
+			isAlreadyAdded = false;
+        }
 		if (!isAlreadyAdded) {
 			comboBox->Items->Add(userBooks[i].genre.c_str());
 		}
