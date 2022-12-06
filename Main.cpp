@@ -55,7 +55,7 @@ void fillComboBox(TComboBox *comboBox);
 void updateMemo(TMemo *bookmarksMemo);
 void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel);
 void setLogEdit(TEdit *edit);
-void setStringGrid(TStringGrid *grid);
+void setStringGrid(TStringGrid *grid, int width, int height);
 void drawFixedRows(TStringGrid *grid);
 void clearStringGrid(TStringGrid *grid);
 void updateStringGrid(TStringGrid *grid);
@@ -64,6 +64,7 @@ void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomB
 void __fastcall BookListChange(TObject *Sender);
 void __fastcall LogUpButtonClick(TObject *Sender);
 void __fastcall LogDownButtonClick(TObject *Sender);
+void deleteRow(TStringGrid *grid);
 
 //UserPreferences.cpp
 void saveFilePref();
@@ -105,6 +106,11 @@ void updateDisplays(TComboBox *genreComboBox, TMemo *memo, TComboBox *booksCombo
 	updateStringGrid(historyGrid);
 }
 
+void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
+	pControl->Width = clWidth;
+    pControl->Height = clHeight;
+}
+
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
    bool isFirstLaunch = checkFirstLaunch();
@@ -112,9 +118,10 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	   TWelcomeForm *Form = new TWelcomeForm(this);
 	   Form->ShowModal();
    }
+   setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
    getDailyGoal();
    getUserData();
-   setStringGrid(HistoryGrid);
+   setStringGrid(HistoryGrid, HistorySheet->Width, HistorySheet->Height);
    setProgress(DailyProgressBar, ReportLabel1);
    setLogEdit(LogEdit);
 
@@ -134,4 +141,23 @@ void __fastcall TMainForm::MainApplicationEventsException(TObject *Sender, Excep
 {
 	addLogLine(returnStr(E->Message));
 }
+
+void __fastcall TMainForm::FormResize(TObject *Sender)
+{
+	setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
+	setStringGrid(HistoryGrid, HistorySheet->Width, HistorySheet->Height);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
+{
+	if ((HistoryGrid->Row != 0) && (HistoryGrid->Row != HistoryGrid->RowCount - 1)) {
+		bool isDeleting = MessageDlg("Are you sure that you want to clear all records? This action can't be undone", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo,0) == mrYes;
+		if (isDeleting) {
+			deleteRow(HistoryGrid);
+			updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+		}
+	}
+}
+//---------------------------------------------------------------------------
 

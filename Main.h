@@ -93,6 +93,8 @@ __published:	// IDE-managed Components
 	void __fastcall LogDownButtonClick(TObject *Sender);
 	void __fastcall AddNewButton1Click(TObject *Sender);
 	void __fastcall MainApplicationEventsException(TObject *Sender, Exception *E);
+	void __fastcall FormResize(TObject *Sender);
+	void __fastcall HistoryGridDblClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);

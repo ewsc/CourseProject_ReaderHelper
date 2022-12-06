@@ -15,9 +15,9 @@
     <Transaction>2022/11/29 09:25:42.000.247,X:\1Second_Year\Course Project\ReaderHelper.cbproj=C:\Users\alamo\OneDrive\Documents\Embarcadero\Studio\Projects\ReaderHelper.cbproj</Transaction>
     <Transaction>2022/11/30 15:20:01.000.872,=X:\1Second_Year\Course Project\Unit1.pas</Transaction>
     <Transaction>2022/11/30 15:20:16.000.783,=X:\1Second_Year\Course Project\Unit1.cpp</Transaction>
+    <Transaction>2022/11/30 15:20:23.000.351,X:\1Second_Year\Course Project\Welcome.dfm=X:\1Second_Year\Course Project\Unit1.dfm</Transaction>
     <Transaction>2022/11/30 15:20:23.000.351,X:\1Second_Year\Course Project\Welcome.cpp=X:\1Second_Year\Course Project\Unit1.cpp</Transaction>
     <Transaction>2022/11/30 15:20:23.000.351,X:\1Second_Year\Course Project\Welcome.h=X:\1Second_Year\Course Project\Unit1.h</Transaction>
-    <Transaction>2022/11/30 15:20:23.000.351,X:\1Second_Year\Course Project\Welcome.dfm=X:\1Second_Year\Course Project\Unit1.dfm</Transaction>
     <Transaction>2022/12/01 01:36:12.000.517,=X:\1Second_Year\Course Project\Unit1.cpp</Transaction>
     <Transaction>2022/12/01 01:38:11.000.587,X:\1Second_Year\Course Project\Unit1.h=X:\1Second_Year\Course Project\Bookmarks.h</Transaction>
     <Transaction>2022/12/01 01:38:11.000.587,X:\1Second_Year\Course Project\Unit1.cpp=X:\1Second_Year\Course Project\Bookmarks.cpp</Transaction>
@@ -35,13 +35,29 @@
     <Transaction>2022/12/04 18:40:37.000.237,X:\1Second_Year\Course Project\AddNEw.h=X:\1Second_Year\Course Project\Unit3.h</Transaction>
     <Transaction>2022/12/04 18:40:37.000.237,X:\1Second_Year\Course Project\AddNEw.cpp=X:\1Second_Year\Course Project\Unit3.cpp</Transaction>
     <Transaction>2022/12/04 18:40:53.000.063,X:\1Second_Year\Course Project\AddNeew.cpp=X:\1Second_Year\Course Project\AddNEw.cpp</Transaction>
-    <Transaction>2022/12/04 18:40:53.000.063,X:\1Second_Year\Course Project\AddNeew.h=X:\1Second_Year\Course Project\AddNEw.h</Transaction>
     <Transaction>2022/12/04 18:40:53.000.063,X:\1Second_Year\Course Project\AddNeew.dfm=X:\1Second_Year\Course Project\AddNEw.dfm</Transaction>
-    <Transaction>2022/12/04 18:40:56.000.910,X:\1Second_Year\Course Project\AddNew.cpp=X:\1Second_Year\Course Project\AddNeew.cpp</Transaction>
-    <Transaction>2022/12/04 18:40:56.000.910,X:\1Second_Year\Course Project\AddNew.h=X:\1Second_Year\Course Project\AddNeew.h</Transaction>
+    <Transaction>2022/12/04 18:40:53.000.063,X:\1Second_Year\Course Project\AddNeew.h=X:\1Second_Year\Course Project\AddNEw.h</Transaction>
     <Transaction>2022/12/04 18:40:56.000.910,X:\1Second_Year\Course Project\AddNew.dfm=X:\1Second_Year\Course Project\AddNeew.dfm</Transaction>
+    <Transaction>2022/12/04 18:40:56.000.910,X:\1Second_Year\Course Project\AddNew.h=X:\1Second_Year\Course Project\AddNeew.h</Transaction>
+    <Transaction>2022/12/04 18:40:56.000.910,X:\1Second_Year\Course Project\AddNew.cpp=X:\1Second_Year\Course Project\AddNeew.cpp</Transaction>
     <Transaction>2022/12/05 01:37:30.000.920,X:\1Second_Year\Course Project\AddNew.cpp=</Transaction>
     <Transaction>2022/12/05 01:38:08.000.366,X:\1Second_Year\Course Project\Files.cpp=</Transaction>
     <Transaction>2022/12/05 01:39:03.000.167,X:\1Second_Year\Course Project\Bookmarks.cpp=</Transaction>
+    <Transaction>2022/12/05 22:14:59.000.752,=X:\1Second_Year\Course Project\Unit1.cpp</Transaction>
+    <Transaction>2022/12/05 22:15:05.000.603,X:\1Second_Year\Course Project\Unit1.cpp=X:\1Second_Year\Course Project\Logs.cpp</Transaction>
+    <Transaction>2022/12/05 22:15:05.000.603,X:\1Second_Year\Course Project\Unit1.h=X:\1Second_Year\Course Project\Logs.h</Transaction>
+    <Transaction>2022/12/05 22:15:05.000.603,X:\1Second_Year\Course Project\Unit1.dfm=X:\1Second_Year\Course Project\Logs.dfm</Transaction>
+    <Transaction>2022/12/05 23:16:17.000.631,=X:\1Second_Year\Course Project\Unit2.cpp</Transaction>
+    <Transaction>2022/12/05 23:16:26.000.727,X:\1Second_Year\Course Project\Unit2.dfm=X:\1Second_Year\Course Project\UserData.dfm</Transaction>
+    <Transaction>2022/12/05 23:16:26.000.727,X:\1Second_Year\Course Project\Unit2.cpp=X:\1Second_Year\Course Project\UserData.cpp</Transaction>
+    <Transaction>2022/12/05 23:16:26.000.727,X:\1Second_Year\Course Project\Unit2.h=X:\1Second_Year\Course Project\UserData.h</Transaction>
+    <Transaction>2022/12/05 23:24:35.000.592,=X:\1Second_Year\Course Project\Unit3.cpp</Transaction>
+    <Transaction>2022/12/05 23:24:44.000.600,X:\1Second_Year\Course Project\Unit3.cpp=X:\1Second_Year\Course Project\UserControls.cpp</Transaction>
+    <Transaction>2022/12/05 23:24:44.000.600,X:\1Second_Year\Course Project\Unit3.h=X:\1Second_Year\Course Project\UserControls.h</Transaction>
+    <Transaction>2022/12/05 23:24:44.000.600,X:\1Second_Year\Course Project\Unit3.dfm=X:\1Second_Year\Course Project\UserControls.dfm</Transaction>
+    <Transaction>2022/12/05 23:36:38.000.053,=X:\1Second_Year\Course Project\Unit4.cpp</Transaction>
+    <Transaction>2022/12/05 23:39:27.000.618,X:\1Second_Year\Course Project\Unit4.cpp=X:\1Second_Year\Course Project\UserPreferences.cpp</Transaction>
+    <Transaction>2022/12/05 23:39:27.000.618,X:\1Second_Year\Course Project\Unit4.h=X:\1Second_Year\Course Project\UserPreferences.h</Transaction>
+    <Transaction>2022/12/05 23:39:27.000.618,X:\1Second_Year\Course Project\Unit4.dfm=X:\1Second_Year\Course Project\UserPreferences.dfm</Transaction>
   </Transactions>
 </BorlandProject>

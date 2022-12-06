@@ -1,11 +1,10 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu, biHelp]
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu, biMinimize, biMaximize, biHelp]
   Caption = 'Reader Helper'
-  ClientHeight = 350
-  ClientWidth = 670
+  ClientHeight = 348
+  ClientWidth = 668
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,6 +15,7 @@ object MainForm: TMainForm
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 14
   object MainPageControl: TPageControl
@@ -23,7 +23,7 @@ object MainForm: TMainForm
     Top = -3
     Width = 500
     Height = 345
-    ActivePage = AddNewSheet
+    ActivePage = HistorySheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 1
@@ -322,14 +322,16 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object HistoryGrid: TStringGrid
-        Left = 3
+        Left = 0
         Top = 48
         Width = 486
         Height = 270
         DefaultColAlignment = taCenter
         RowCount = 2
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
         ScrollBars = ssVertical
         TabOrder = 0
+        OnDblClick = HistoryGridDblClick
         ColWidths = (
           64
           64
@@ -344,10 +346,10 @@ object MainForm: TMainForm
     end
   end
   object ToolBar1: TToolBar
-    Left = 641
+    Left = 639
     Top = 0
     Width = 29
-    Height = 350
+    Height = 348
     Align = alRight
     TabOrder = 0
   end

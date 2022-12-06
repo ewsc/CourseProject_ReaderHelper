@@ -84,7 +84,15 @@ void setLogEdit(TEdit *edit) {
 	edit->Text = 1;
 }
 
-void setStringGrid(TStringGrid *grid) {
+void deleteRow(TStringGrid *grid) {
+	int index = grid->Row - 1;
+	userBooks.erase(userBooks.begin() + index);
+}
+
+void setStringGrid(TStringGrid *grid, int width, int height) {
+	grid->Width = width - 30;
+	grid->Height = height;
+
 	grid->ColWidths[0] = round(grid->Width * 0.05);
 	grid->ColWidths[1] = round(grid->Width * 0.3);
 	grid->ColWidths[2] = round(grid->Width * 0.25);
@@ -102,8 +110,10 @@ void drawFixedRows(TStringGrid *grid) {
 
 void clearStringGrid(TStringGrid *grid) {
 	grid->RowCount = 2;
-	for (int i = 0; i < 5; i++) {
-		grid->Cells[i][1] = "";
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 5; j++) {
+			grid->Cells[i][j] = "";
+		}
 	}
 }
 
