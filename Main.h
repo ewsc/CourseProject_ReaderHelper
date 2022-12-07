@@ -59,7 +59,6 @@ __published:	// IDE-managed Components
 	TLabel *ReportLabel2;
 	TAdvSmoothProgressBar *DailyProgressBar;
 	TMemo *BookmarksMemo;
-	TButton *AddButton;
 	TComboBox *BookList;
 	TEdit *BookmarkEdit;
 	TButton *EditButton;
@@ -70,10 +69,6 @@ __published:	// IDE-managed Components
 	TEdit *LogEdit;
 	TButton *LogUpButton;
 	TButton *LogDownButton;
-	TToolBar *ToolBar1;
-	TMainMenu *MainMenu;
-	TMenuItem *FileButton;
-	TMenuItem *OpenButton;
 	TTabSheet *AddNewSheet;
 	TLabel *AddNewLabel1;
 	TEdit *BookNameEdit1;
@@ -86,6 +81,7 @@ __published:	// IDE-managed Components
 	TLabel *AddNewLabel5;
 	TButton *AddNewButton1;
 	TApplicationEvents *MainApplicationEvents;
+	TImageList *MainImageList;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);

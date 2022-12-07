@@ -42,8 +42,8 @@ struct byGenre {
 bool genreIsAlreadyAdded(string compareStr) {
     //ShowMessage(userBooks.size());
 	for (int i = 0; i < userBooks.size(); i++) {
-		if (userBooks[i].genre.compare(compareStr.c_str()) == 0) {
-            return true;
+		if (userBooks[i].genre == compareStr) {
+            //return true;
         }
     }
 	return false;
@@ -99,7 +99,7 @@ void deleteRow(TStringGrid *grid) {
 }
 
 void setStringGrid(TStringGrid *grid, int width, int height) {
-	grid->Width = width - 30;
+	grid->Width = width;
 	grid->Height = height;
 
 	grid->ColWidths[0] = round(grid->Width * 0.05);
