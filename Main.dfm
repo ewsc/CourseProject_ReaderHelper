@@ -5725,7 +5725,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 302
-    ActivePage = HistorySheet
+    ActivePage = AddNewSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0

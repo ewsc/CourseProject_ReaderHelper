@@ -36,14 +36,16 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 struct byGenre {
 	bool operator()(userBook const &a, userBook const &b) const {
 		return a.genre < b.genre;
-    }
+	}
 };
 
-bool genreIsAlreadyAdded(string compareStr) {
-    //ShowMessage(userBooks.size());
-	for (int i = 0; i < userBooks.size(); i++) {
-		if (userBooks[i].genre == compareStr) {
-            //return true;
+bool genreIsAlreadyAdded(string compareStr, TComboBox *comboBox) {
+	for (int i = 0; i < comboBox->Items->Count; i++) {
+		string one = returnStr(comboBox->Items->operator[](i));
+
+
+		if (one == compareStr.c_str()) {
+			return true;
         }
     }
 	return false;
@@ -51,10 +53,10 @@ bool genreIsAlreadyAdded(string compareStr) {
 
 void setAddNewComboBox(TComboBox *comboBox) {
 	comboBox->Items->Clear();
-	bool isAlreadyAdded;
 	for (int i = 0; i < userBooks.size(); i++) {
+		bool isAlreadyAdded;
 		if (i != 0) {
-			isAlreadyAdded = genreIsAlreadyAdded(userBooks[i].genre);
+			isAlreadyAdded = genreIsAlreadyAdded(userBooks[i].genre, comboBox);
 		}
 		else {
 			isAlreadyAdded = false;
