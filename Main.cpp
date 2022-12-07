@@ -16,6 +16,7 @@
 #include "Logs.h"
 #include "UserData.h"
 #include "UserControls.h"
+#include "Edit.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -34,6 +35,8 @@ const string appVersion = "0.0";
 
 int dailyGoal = 0;
 int currentGoalStat = 0;
+
+int rowId;
 
 vector<userBook> userBooks;
 
@@ -69,6 +72,9 @@ void deleteRow(TStringGrid *grid);
 //UserPreferences.cpp
 void saveFilePref();
 void getDailyGoal();
+
+//Edit.cpp
+void fillForm(TEdit *bookName, TEdit *authorName, TEdit *customGenre, TComboBox *genre);
 
 
 TMainForm *MainForm;
@@ -142,6 +148,12 @@ void __fastcall TMainForm::MainApplicationEventsException(TObject *Sender, Excep
 	addLogLine(returnStr(E->Message));
 }
 
+void deleteBook() {
+    deleteRow(HistoryGrid);
+	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+	rewriteFileData();
+}
+
 void __fastcall TMainForm::FormResize(TObject *Sender)
 {
 	setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
@@ -152,12 +164,10 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
 void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 {
 	if ((HistoryGrid->Row != 0) && (HistoryGrid->Row != HistoryGrid->RowCount - 1)) {
-		bool isDeleting = MessageDlg("Are you sure that you want to clear all records? This action can't be undone", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo,0) == mrYes;
-		if (isDeleting) {
-			deleteRow(HistoryGrid);
-			updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
-            rewriteFileData();
-		}
+		rowId = HistoryGrid->Row;
+
+		TEditForm *Form = new TEditForm(this);
+		Form->ShowModal();
 	}
 }
 //---------------------------------------------------------------------------

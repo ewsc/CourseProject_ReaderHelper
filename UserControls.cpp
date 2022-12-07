@@ -41,10 +41,7 @@ struct byGenre {
 
 bool genreIsAlreadyAdded(string compareStr, TComboBox *comboBox) {
 	for (int i = 0; i < comboBox->Items->Count; i++) {
-		string one = returnStr(comboBox->Items->operator[](i));
-
-
-		if (one == compareStr.c_str()) {
+		if (returnStr(comboBox->Items->operator[](i)) == compareStr.c_str()) {
 			return true;
         }
     }
