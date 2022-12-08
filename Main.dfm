@@ -6587,5 +6587,9 @@ object MainForm: TMainForm
       Caption = 'aDeleteItem'
       OnExecute = aDeleteItemExecute
     end
+    object aEditItem: TAction
+      Caption = 'aEditItem'
+      OnExecute = aEditItemExecute
+    end
   end
 end

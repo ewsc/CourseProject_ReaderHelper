@@ -174,3 +174,10 @@ void __fastcall TMainForm::aDeleteItemExecute(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
+{
+    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+	rewriteFileData();
+}
+//---------------------------------------------------------------------------
+

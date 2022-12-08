@@ -18,8 +18,11 @@ namespace fs = std::filesystem;
 extern int rowId;
 extern vector<userBook> userBooks;
 
+//UserControls.cpp
 void setAddNewComboBox(TComboBox *comboBox);
-//void __fastcall aDeleteItemExecute(TObject *Sender);
+
+//Main.cpp
+string returnStr(AnsiString output);
 
 TEditForm *EditForm;
 //---------------------------------------------------------------------------
@@ -35,6 +38,7 @@ void __fastcall TEditForm::FormActivate(TObject *Sender)
 	BookAuthorEdit1->Text = userBooks[rowId - 1].bookAuthor.c_str();
 	CustomBookGenre->Text = userBooks[rowId - 1].genre.c_str();
 	setAddNewComboBox(BookGenreComboBox);
+	IsFinishedCheckbox->Checked = userBooks[rowId - 1].isFinished;
 }
 //---------------------------------------------------------------------------
 
@@ -43,7 +47,35 @@ void __fastcall TEditForm::DeleteButton1Click(TObject *Sender)
 	bool isDeleting = MessageDlg("Are you sure that you want to delete this book from reading history?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo,0) == mrYes;
 	if (isDeleting) {
 		MainForm->aDeleteItem->Execute();
+        Close();
 	}
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TEditForm::EditButton1Click(TObject *Sender)
+{
+	userBook newBook;
+	newBook.bookName = returnStr(BookNameEdit1->Text);
+	newBook.bookAuthor = returnStr(BookAuthorEdit1->Text);
+	if (CustomBookGenre->Text != "") {
+		newBook.genre = returnStr(CustomBookGenre->Text);
+	}
+	else {
+		newBook.genre = returnStr(BookGenreComboBox->Text);
+	}
+	newBook.isFinished = IsFinishedCheckbox->Checked;
+
+	if (newBook.isFinished ) {
+		time_t now = time(0);
+		string finishedReadingTime = ctime(&now);
+
+		finishedReadingTime[finishedReadingTime.length() - 1] = ' ';
+		newBook.finishedReading = finishedReadingTime;
+	}
+	userBooks[rowId - 1] = newBook;
+	MainForm->aEditItem->Execute();
+    Close();
 }
 //---------------------------------------------------------------------------
 

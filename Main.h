@@ -86,6 +86,7 @@ __published:	// IDE-managed Components
 	TLabel *AddNewLabel5;
 	TActionList *MainActionList;
 	TAction *aDeleteItem;
+	TAction *aEditItem;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);
@@ -96,6 +97,7 @@ __published:	// IDE-managed Components
 	void __fastcall FormResize(TObject *Sender);
 	void __fastcall HistoryGridDblClick(TObject *Sender);
 	void __fastcall aDeleteItemExecute(TObject *Sender);
+	void __fastcall aEditItemExecute(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);

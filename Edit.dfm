@@ -5796,6 +5796,7 @@ object EditForm: TEditForm
     Height = 25
     Caption = 'Edit'
     TabOrder = 4
+    OnClick = EditButton1Click
   end
   object DeleteButton1: TButton
     Left = 200
@@ -5805,5 +5806,13 @@ object EditForm: TEditForm
     Caption = 'Delete'
     TabOrder = 5
     OnClick = DeleteButton1Click
+  end
+  object IsFinishedCheckbox: TCheckBox
+    Left = 8
+    Top = 175
+    Width = 140
+    Height = 17
+    Caption = 'Finished Reading'
+    TabOrder = 6
   end
 end
