@@ -107,10 +107,11 @@ void importBookMarks(TMemo *bookmarksMemo, TComboBox *comboBox) {
 	updateMemo(bookmarksMemo);
 }
 
-void updateDisplays(TComboBox *genreComboBox, TMemo *memo, TComboBox *booksComboBox, TStringGrid *historyGrid) {
+void updateDisplays(TComboBox *genreComboBox, TMemo *bookmarkMemo, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo) {
 	setAddNewComboBox(genreComboBox);
-	importBookMarks(memo, booksComboBox);
+	importBookMarks(bookmarkMemo, booksComboBox);
 	updateStringGrid(historyGrid);
+	setReadingStat(statMemo);
 }
 
 void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
@@ -132,7 +133,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    setProgress(DailyProgressBar, ReportLabel1);
    setLogEdit(LogEdit);
    setReadingStat(ReadStatMemo);
-   updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+   updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo);
 }
 
 string returnStr(AnsiString output) {
@@ -170,14 +171,14 @@ void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 void __fastcall TMainForm::aDeleteItemExecute(TObject *Sender)
 {
 	deleteRow(HistoryGrid);
-	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo);
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
 {
-    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo);
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------

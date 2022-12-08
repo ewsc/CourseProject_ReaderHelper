@@ -5725,7 +5725,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 302
-    ActivePage = ReportsSheet
+    ActivePage = AddNewSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0
@@ -5756,7 +5756,7 @@ object MainForm: TMainForm
         Caption = 'Input book name'
       end
       object AddNewLabel3: TLabel
-        Left = 208
+        Left = 231
         Top = 36
         Width = 98
         Height = 14
@@ -5770,7 +5770,7 @@ object MainForm: TMainForm
         Caption = 'Input book genre'
       end
       object AddNewLabel5: TLabel
-        Left = 167
+        Left = 200
         Top = 123
         Width = 11
         Height = 14
@@ -5779,21 +5779,21 @@ object MainForm: TMainForm
       object BookNameEdit1: TEdit
         Left = 0
         Top = 56
-        Width = 145
+        Width = 178
         Height = 22
         TabOrder = 0
       end
       object BookAuthorEdit1: TEdit
-        Left = 208
+        Left = 231
         Top = 56
-        Width = 145
+        Width = 178
         Height = 22
         TabOrder = 1
       end
       object BookGenreComboBox: TComboBox
-        Left = 208
+        Left = 231
         Top = 120
-        Width = 145
+        Width = 178
         Height = 22
         TabOrder = 2
         Text = 'Select genre'
@@ -5801,12 +5801,12 @@ object MainForm: TMainForm
       object CustomBookGenre: TEdit
         Left = 0
         Top = 120
-        Width = 145
+        Width = 185
         Height = 22
         TabOrder = 3
       end
       object AddNewButton1: TButton
-        Left = 278
+        Left = 334
         Top = 168
         Width = 75
         Height = 25
