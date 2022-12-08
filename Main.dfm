@@ -6580,4 +6580,12 @@ object MainForm: TMainForm
       E0000007E0000007000000000000000000000000000000000000000000000000
       000000000000}
   end
+  object MainActionList: TActionList
+    Left = 440
+    Top = 248
+    object aDeleteItem: TAction
+      Caption = 'aDeleteItem'
+      OnExecute = aDeleteItemExecute
+    end
+  end
 end

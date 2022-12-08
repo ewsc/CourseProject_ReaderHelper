@@ -17,6 +17,8 @@
 #include <Vcl.ToolWin.hpp>
 #include <Vcl.Menus.hpp>
 #include <Vcl.AppEvnts.hpp>
+#include <System.Actions.hpp>
+#include <Vcl.ActnList.hpp>
 #include <string>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -82,6 +84,8 @@ __published:	// IDE-managed Components
 	TLabel *AddNewLabel3;
 	TLabel *AddNewLabel4;
 	TLabel *AddNewLabel5;
+	TActionList *MainActionList;
+	TAction *aDeleteItem;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);
@@ -91,6 +95,7 @@ __published:	// IDE-managed Components
 	void __fastcall MainApplicationEventsException(TObject *Sender, Exception *E);
 	void __fastcall FormResize(TObject *Sender);
 	void __fastcall HistoryGridDblClick(TObject *Sender);
+	void __fastcall aDeleteItemExecute(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);

@@ -148,12 +148,6 @@ void __fastcall TMainForm::MainApplicationEventsException(TObject *Sender, Excep
 	addLogLine(returnStr(E->Message));
 }
 
-void deleteBook() {
-    deleteRow(HistoryGrid);
-	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
-	rewriteFileData();
-}
-
 void __fastcall TMainForm::FormResize(TObject *Sender)
 {
 	setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
@@ -169,6 +163,14 @@ void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 		TEditForm *Form = new TEditForm(this);
 		Form->ShowModal();
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::aDeleteItemExecute(TObject *Sender)
+{
+	deleteRow(HistoryGrid);
+	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
+	rewriteFileData();
 }
 //---------------------------------------------------------------------------
 
