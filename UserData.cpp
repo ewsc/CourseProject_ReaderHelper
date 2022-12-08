@@ -96,10 +96,13 @@ void __fastcall TMainForm::AddNewButton1Click(TObject *Sender)
 		newBook.genre = returnStr(BookGenreComboBox->Text);
 	}
 
-	time_t now = time(0);
-	string startedReadingTime = ctime(&now);
+//	time_t now = time(0);
+//	string startedReadingTime = ctime(&now);
+//
 
-	startedReadingTime[startedReadingTime.length() - 1] = ' ';
+
+	long int t = static_cast<long int> (time(0));
+	string startedReadingTime = to_string(t);
 	newBook.startedReading = startedReadingTime;
 
 	newBook.finishedReading = "0";

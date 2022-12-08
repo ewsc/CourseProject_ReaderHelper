@@ -55,7 +55,7 @@ void __fastcall TEditForm::DeleteButton1Click(TObject *Sender)
 
 void __fastcall TEditForm::EditButton1Click(TObject *Sender)
 {
-	userBook newBook;
+	userBook newBook = userBooks[rowId - 1];
 	newBook.bookName = returnStr(BookNameEdit1->Text);
 	newBook.bookAuthor = returnStr(BookAuthorEdit1->Text);
 	if (CustomBookGenre->Text != "") {
@@ -67,10 +67,8 @@ void __fastcall TEditForm::EditButton1Click(TObject *Sender)
 	newBook.isFinished = IsFinishedCheckbox->Checked;
 
 	if (newBook.isFinished ) {
-		time_t now = time(0);
-		string finishedReadingTime = ctime(&now);
-
-		finishedReadingTime[finishedReadingTime.length() - 1] = ' ';
+		long int t = static_cast<long int> (time(0));
+		string finishedReadingTime = to_string(t);
 		newBook.finishedReading = finishedReadingTime;
 	}
 	userBooks[rowId - 1] = newBook;

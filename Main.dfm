@@ -5725,7 +5725,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 302
-    ActivePage = HistorySheet
+    ActivePage = ReportsSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0
@@ -5845,6 +5845,13 @@ object MainForm: TMainForm
         Font.Style = []
         ParentFont = False
       end
+      object ReportLabel4: TLabel
+        Left = 3
+        Top = 100
+        Width = 75
+        Height = 14
+        Caption = 'Reading Time'
+      end
       object DailyProgressBar: TAdvSmoothProgressBar
         Left = 3
         Top = 56
@@ -5913,6 +5920,23 @@ object MainForm: TMainForm
         Caption = '-'
         TabOrder = 3
         OnClick = LogDownButtonClick
+      end
+      object ReadStatMemo: TMemo
+        Left = 3
+        Top = 120
+        Width = 390
+        Height = 89
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Lucida Console'
+        Font.Style = []
+        Lines.Strings = (
+          'ReadStatMemo')
+        ParentFont = False
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 4
       end
     end
     object BookmarksSheet: TTabSheet
@@ -6013,7 +6037,7 @@ object MainForm: TMainForm
         Left = 0
         Top = 48
         Width = 486
-        Height = 270
+        Height = 222
         DefaultColAlignment = taCenter
         RowCount = 2
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]

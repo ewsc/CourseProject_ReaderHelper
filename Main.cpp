@@ -58,7 +58,7 @@ void fillComboBox(TComboBox *comboBox);
 void updateMemo(TMemo *bookmarksMemo);
 void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel);
 void setLogEdit(TEdit *edit);
-void setStringGrid(TStringGrid *grid, int width, int height);
+void setStringGrid(TStringGrid *grid, int clWIdth, int gridWidth, int height);
 void drawFixedRows(TStringGrid *grid);
 void clearStringGrid(TStringGrid *grid);
 void updateStringGrid(TStringGrid *grid);
@@ -68,6 +68,7 @@ void __fastcall BookListChange(TObject *Sender);
 void __fastcall LogUpButtonClick(TObject *Sender);
 void __fastcall LogDownButtonClick(TObject *Sender);
 void deleteRow(TStringGrid *grid);
+void setReadingStat(TMemo *memo);
 
 //UserPreferences.cpp
 void saveFilePref();
@@ -127,10 +128,10 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
    getDailyGoal();
    getUserData();
-   setStringGrid(HistoryGrid, HistorySheet->Width, HistorySheet->Height);
+   setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
    setProgress(DailyProgressBar, ReportLabel1);
    setLogEdit(LogEdit);
-
+   setReadingStat(ReadStatMemo);
    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid);
 }
 
@@ -151,7 +152,7 @@ void __fastcall TMainForm::MainApplicationEventsException(TObject *Sender, Excep
 void __fastcall TMainForm::FormResize(TObject *Sender)
 {
 	setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
-	setStringGrid(HistoryGrid, HistorySheet->Width, HistorySheet->Height);
+	setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
 }
 //---------------------------------------------------------------------------
 

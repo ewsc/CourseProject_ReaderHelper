@@ -17,6 +17,8 @@ extern vector<userBook> userBooks;
 extern int dailyGoal;
 extern int currentGoalStat;
 
+const int seconds_per_day = 60*60*24;
+
 //Main.cpp
 string returnStr(AnsiString output);
 void saveFilePref();
@@ -97,8 +99,8 @@ void deleteRow(TStringGrid *grid) {
 	userBooks.erase(userBooks.begin() + index);
 }
 
-void setStringGrid(TStringGrid *grid, int width, int height) {
-	grid->Width = width;
+void setStringGrid(TStringGrid *grid, int clWIdth, int gridWidth, int height) {
+	grid->Width = clWIdth;
 	grid->Height = height;
 
 	grid->ColWidths[0] = round(grid->Width * 0.05);
@@ -138,10 +140,31 @@ void updateStringGrid(TStringGrid *grid) {
 			grid->Cells[4][i+1] = "Still reading";
 		}
 		else {
-			grid->Cells[4][i+1] = userBooks[i].finishedReading.c_str();
+			time_t finTime = stoi(userBooks[i].finishedReading.c_str());
+			tm* finTm = localtime(&finTime);
+			char tempLine[100];
+			strftime(tempLine, 50, "%d %B", finTm);
+			grid->Cells[4][i+1] = tempLine;
 		}
         grid->RowCount += 1;
 	}
+}
+
+void setReadingStat(TMemo *memo) {
+	memo->Clear();
+	for (int i = 0; i < userBooks.size(); i++) {
+		if (userBooks[i].startedReading != "0" && userBooks[i].finishedReading != "0") {
+			time_t finTime = stoi(userBooks[i].finishedReading.c_str());
+			time_t startTime = stoi(userBooks[i].startedReading.c_str());
+			double hours = difftime(finTime, startTime) / 60 / 60;
+
+			stringstream stream;
+			stream << fixed << setprecision(2) << hours;
+			string sthours = stream.str();
+			string tempLine = "[" + userBooks[i].bookName + "] -> read in " + sthours + " hours.";
+			memo->Lines->Add(tempLine.c_str());
+        }
+    }
 }
 
 void __fastcall TMainForm::EditButtonClick(TObject *Sender)

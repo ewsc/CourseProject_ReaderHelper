@@ -36,17 +36,19 @@
 #include <Vcl.Grids.hpp>
 
 #include <vcl.h>
+#include <sstream>
 #include <windows.h>
 #pragma hdrstop
 #include <ShlObj.h>
 #include <string>
 #include <filesystem>
+#include <cmath>
 #include <iostream>
 #include <fstream>
 #include <ctime>
-#include <cmath>
 #include <vector>
 #include <exception>
+#include <iomanip>
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
@@ -87,6 +89,8 @@ __published:	// IDE-managed Components
 	TActionList *MainActionList;
 	TAction *aDeleteItem;
 	TAction *aEditItem;
+	TMemo *ReadStatMemo;
+	TLabel *ReportLabel4;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);
