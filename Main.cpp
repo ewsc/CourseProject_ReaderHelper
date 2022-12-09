@@ -110,10 +110,6 @@ void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
    bool isFirstLaunch = checkFirstLaunch();
-   if (isFirstLaunch) {
-	   TWelcomeForm *Form = new TWelcomeForm(this);
-	   Form->ShowModal();
-   }
    setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
    getUserData();
    setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
