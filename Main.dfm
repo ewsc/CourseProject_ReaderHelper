@@ -5818,20 +5818,6 @@ object MainForm: TMainForm
     object ReportsSheet: TTabSheet
       Caption = 'Report'
       ImageIndex = 1
-      object ReportLabel1: TLabel
-        Left = 3
-        Top = 36
-        Width = 81
-        Height = 14
-        Caption = 'Daily progress:'
-      end
-      object ReportLabel2: TLabel
-        Left = 272
-        Top = 36
-        Width = 21
-        Height = 14
-        Caption = 'Log:'
-      end
       object ReportLabel3: TLabel
         Left = 5
         Top = 5
@@ -5846,43 +5832,102 @@ object MainForm: TMainForm
         ParentFont = False
       end
       object ReportLabel4: TLabel
-        Left = 3
-        Top = 100
-        Width = 75
+        Left = 0
+        Top = 44
+        Width = 84
         Height = 14
-        Caption = 'Reading Time'
+        Caption = 'Finished Books'
       end
       object ReportLabel5: TLabel
         Left = 0
-        Top = 215
+        Top = 175
         Width = 148
         Height = 14
         Caption = 'Average book reading time:'
       end
-      object DailyProgressBar: TAdvSmoothProgressBar
-        Left = 3
-        Top = 56
-        Width = 174
+      object ReadStatMemo: TMemo
+        Left = 0
+        Top = 64
+        Width = 497
+        Height = 89
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Lucida Console'
+        Font.Style = []
+        Lines.Strings = (
+          'ReadStatMemo')
+        ParentFont = False
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object ProgressSheet: TTabSheet
+      Caption = 'Progress'
+      ImageIndex = 2
+      object ProgressLabel1: TLabel
+        Left = 0
+        Top = 5
+        Width = 142
         Height = 24
+        Caption = 'Reading Progress'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
+      object ProgressLabel2: TLabel
+        Left = 328
+        Top = 43
+        Width = 73
+        Height = 14
+        Caption = 'Select a Book'
+      end
+      object BookList: TComboBox
+        Left = 3
+        Top = 43
+        Width = 145
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Text = 'Select a book'
+        OnChange = BookListChange
+      end
+      object ReadProgressBar: TAdvSmoothProgressBar
+        Left = 163
+        Top = 43
+        Width = 150
+        Height = 26
         Step = 10.000000000000000000
         Maximum = 100.000000000000000000
-        Appearance.BackGroundFill.Color = 11974326
-        Appearance.BackGroundFill.ColorTo = 11974326
+        Position = 27.000000000000000000
+        Appearance.Shadows = False
+        Appearance.Overlays = False
+        Appearance.BackGroundFill.Color = clWhite
+        Appearance.BackGroundFill.ColorTo = clWhite
         Appearance.BackGroundFill.ColorMirror = clNone
         Appearance.BackGroundFill.ColorMirrorTo = clNone
         Appearance.BackGroundFill.GradientType = gtVertical
         Appearance.BackGroundFill.GradientMirrorType = gtSolid
-        Appearance.BackGroundFill.BorderColor = clSilver
+        Appearance.BackGroundFill.BorderColor = 13948116
         Appearance.BackGroundFill.Rounding = 0
         Appearance.BackGroundFill.ShadowOffset = 0
         Appearance.BackGroundFill.Glow = gmNone
-        Appearance.ProgressFill.Color = clWhite
-        Appearance.ProgressFill.ColorTo = clBtnFace
+        Appearance.ProgressFill.Color = 14925219
+        Appearance.ProgressFill.ColorTo = clNone
         Appearance.ProgressFill.ColorMirror = clNone
         Appearance.ProgressFill.ColorMirrorTo = clNone
         Appearance.ProgressFill.GradientType = gtVertical
         Appearance.ProgressFill.GradientMirrorType = gtVertical
-        Appearance.ProgressFill.BorderColor = clBlack
+        Appearance.ProgressFill.BorderColor = 14925219
         Appearance.ProgressFill.Rounding = 0
         Appearance.ProgressFill.ShadowOffset = 0
         Appearance.ProgressFill.Glow = gmNone
@@ -5898,130 +5943,37 @@ object MainForm: TMainForm
         Appearance.ProgressFont.Style = []
         Appearance.ValueFormat = '%.0f%%'
         Version = '1.10.1.2'
-        UIStyle = tsWindowsXP
+        UIStyle = tsOffice2016White
         TMSStyle = 0
       end
       object LogEdit: TEdit
-        Left = 272
-        Top = 56
+        Left = 3
+        Top = 97
         Width = 121
         Height = 22
         NumbersOnly = True
-        TabOrder = 1
+        TabOrder = 2
         Text = 'LogEdit'
       end
       object LogUpButton: TButton
-        Left = 399
-        Top = 55
+        Left = 130
+        Top = 96
         Width = 26
         Height = 25
         Caption = '+'
-        TabOrder = 2
+        Enabled = False
+        TabOrder = 3
         OnClick = LogUpButtonClick
       end
       object LogDownButton: TButton
-        Left = 431
-        Top = 55
+        Left = 162
+        Top = 96
         Width = 26
         Height = 25
         Caption = '-'
-        TabOrder = 3
-        OnClick = LogDownButtonClick
-      end
-      object ReadStatMemo: TMemo
-        Left = 0
-        Top = 120
-        Width = 390
-        Height = 89
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Lucida Console'
-        Font.Style = []
-        Lines.Strings = (
-          'ReadStatMemo')
-        ParentFont = False
-        ReadOnly = True
-        ScrollBars = ssVertical
+        Enabled = False
         TabOrder = 4
-      end
-    end
-    object BookmarksSheet: TTabSheet
-      Caption = 'Bookmarks'
-      ImageIndex = 2
-      object BookmarkLabel1: TLabel
-        Left = 0
-        Top = 5
-        Width = 92
-        Height = 24
-        Caption = 'Bookmarks'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
-      end
-      object BookmarksMemo: TMemo
-        Left = 0
-        Top = 35
-        Width = 489
-        Height = 166
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Calibri'
-        Font.Style = []
-        Lines.Strings = (
-          'BookmarksMemo')
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 0
-      end
-      object BookList: TComboBox
-        Left = 0
-        Top = 217
-        Width = 145
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        Text = 'Select a book'
-        OnChange = BookListChange
-      end
-      object BookmarkEdit: TEdit
-        Left = 151
-        Top = 217
-        Width = 121
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Calibri'
-        Font.Style = []
-        MaxLength = 3
-        NumbersOnly = True
-        ParentFont = False
-        TabOrder = 2
-      end
-      object EditButton: TButton
-        Left = 278
-        Top = 216
-        Width = 75
-        Height = 25
-        Caption = 'Edit'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-        OnClick = EditButtonClick
+        OnClick = LogDownButtonClick
       end
     end
     object HistorySheet: TTabSheet

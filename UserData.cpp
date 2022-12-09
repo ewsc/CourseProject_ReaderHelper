@@ -15,7 +15,7 @@ extern vector<userBook> userBooks;
 //Main.cpp
 string returnStr(AnsiString output);
 void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox);
-void updateDisplays(TComboBox *genreComboBox, TMemo *bookmarkMemo, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label);
+void updateDisplays(TComboBox *genreComboBox, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label);
 
 TForm2 *Form2;
 //---------------------------------------------------------------------------
@@ -39,12 +39,7 @@ void rewriteFileData() {
 	ofstream userDataFile(mainFolder + "\\" + userDataPath);
 	for (int i = 0; i < userBooks.size(); i++) {
 		string tempString;
-		if (userBooks[i].isFinished) {
-			tempString = "[" + userBooks[i].bookName + "][" + to_string(userBooks[i].bookmark) + "][" + userBooks[i].bookAuthor + "][" + userBooks[i].genre + "][" + userBooks[i].startedReading + "][" + userBooks[i].finishedReading + "][F]";
-		}
-		else {
-			tempString = "[" + userBooks[i].bookName + "][" + to_string(userBooks[i].bookmark) + "][" + userBooks[i].bookAuthor + "][" + userBooks[i].genre + "][" + userBooks[i].startedReading + "][" + userBooks[i].finishedReading + "][N]";
-		}
+		tempString = "[" + userBooks[i].bookName + "][" + to_string(userBooks[i].bookmark) + "][" + userBooks[i].bookAuthor + "][" + userBooks[i].genre + "][" + userBooks[i].startedReading + "][" + userBooks[i].finishedReading + "][" + to_string(userBooks[i].currPage) + "][" + to_string(userBooks[i].bookLength) + "]";
 		userDataFile << tempString << endl;
 	}
 	userDataFile.close();
@@ -58,20 +53,19 @@ void distributeString(string currLine) {
 	string newBookGenre = getNext(currLine, &index);
 	string newStartedReading = getNext(currLine, &index);
 	string newFinishedReading = getNext(currLine, &index);
-	string finished_reading = getNext(currLine, &index);
+	string newCurrPage = getNext(currLine, &index);
+	string newBookLength = getNext(currLine, &index);
 	userBook newBook;
 	newBook.bookName = newBookName;
 	newBook.bookmark = stoi(newBookmarkPage);
 	newBook.bookAuthor = newBookAuthor;
 	newBook.genre = newBookGenre;
 	newBook.startedReading = newStartedReading;
+
+	newBook.currPage = stoi(newCurrPage);
+	newBook.bookLength = stoi(newBookLength);
+
 	newBook.finishedReading = newFinishedReading;
-	if (finished_reading == "F") {
-		newBook.isFinished = true;
-	}
-	else if (finished_reading == "N") {
-		newBook.isFinished = false;
-	}
 	userBooks.push_back(newBook);
 }
 
@@ -101,11 +95,13 @@ void __fastcall TMainForm::AddNewButton1Click(TObject *Sender)
 	newBook.startedReading = startedReadingTime;
 
 	newBook.finishedReading = "0";
-	newBook.isFinished = false;
-    newBook.bookmark = 0;
+	//newBook.isFinished = false;
+	newBook.bookmark = 0;
+	newBook.currPage = 0;
+	newBook.bookLength = 0;
 
 	userBooks.push_back(newBook);
 	rewriteFileData();
 	clearAllInputs(BookNameEdit1, BookAuthorEdit1, CustomBookGenre, BookGenreComboBox);
-	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+	updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 }

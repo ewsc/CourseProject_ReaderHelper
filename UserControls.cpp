@@ -14,8 +14,6 @@ using namespace std;
 namespace fs = std::filesystem;
 
 extern vector<userBook> userBooks;
-extern int dailyGoal;
-extern int currentGoalStat;
 
 vector<double> readingTime;
 
@@ -75,23 +73,6 @@ void fillComboBox(TComboBox *comboBox) {
 	}
 }
 
-void updateMemo(TMemo *bookmarksMemo) {
-	bookmarksMemo->Lines->Clear();
-	for (int i = 0; i < userBooks.size(); i++) {
-		string tempString = "[" + userBooks[i].bookName + "], Page: " + to_string(userBooks[i].bookmark);
-		bookmarksMemo->Lines->Add(tempString.c_str());
-	}
-}
-
-void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel) {
-	double d_percentage;
-	d_percentage = ((double)currentGoalStat / dailyGoal);
-	d_percentage = d_percentage * 100;
-	int percentage = d_percentage;
-	progressBar->Position = percentage;
-	reportLabel->Caption = ("Daily progress: " + IntToStr(currentGoalStat) + " of " + IntToStr(dailyGoal) + " (" + percentage + "%)").c_str();
-}
-
 void setLogEdit(TEdit *edit) {
 	edit->Text = 1;
 }
@@ -117,7 +98,7 @@ void drawFixedRows(TStringGrid *grid) {
 	grid->Cells[1][0] = "Name";
 	grid->Cells[2][0] = "Author";
 	grid->Cells[3][0] = "Genre";
-	grid->Cells[4][0] = "Finished";
+	grid->Cells[4][0] = "Progress";
 }
 
 void clearStringGrid(TStringGrid *grid) {
@@ -172,6 +153,11 @@ void printReadingStat(TLabel *label) {
 	label->Caption = line.c_str();
 }
 
+string currProgress(int index) {
+	double result = ((double)userBooks[index].currPage / userBooks[index].bookLength * 100);
+    return to_string((int)result);
+}
+
 void updateStringGrid(TStringGrid *grid) {
 	clearStringGrid(grid);
 	drawFixedRows(grid);
@@ -180,17 +166,7 @@ void updateStringGrid(TStringGrid *grid) {
 		grid->Cells[1][i+1] = userBooks[i].bookName.c_str();
 		grid->Cells[2][i+1] = userBooks[i].bookAuthor.c_str();
 		grid->Cells[3][i+1] = userBooks[i].genre.c_str();
-
-		if (!userBooks[i].isFinished) {
-			grid->Cells[4][i+1] = "—";
-		}
-		else {
-			time_t finTime = stoi(userBooks[i].finishedReading.c_str());
-			tm* finTm = localtime(&finTime);
-			char tempLine[100];
-			strftime(tempLine, 50, "%d %B", finTm);
-			grid->Cells[4][i+1] = tempLine;
-		}
+		grid->Cells[4][i+1] = currProgress(i).c_str();
         grid->RowCount += 1;
 	}
 }
@@ -212,16 +188,6 @@ void setReadingStat(TMemo *memo) {
     }
 }
 
-void __fastcall TMainForm::EditButtonClick(TObject *Sender)
-{
-	string output = returnStr(BookmarkEdit->Text);
-	userBooks[BookList->ItemIndex].bookmark = stoi(output.c_str());
-	updateMemo(BookmarksMemo);
-	rewriteFileData();
-	BookList->ItemIndex = -1;
-    BookmarkEdit->Text = "";
-}
-
 void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox) {
 	BookNameEdit1->Text = "";
 	BookAuthorEdit1->Text = "";
@@ -229,25 +195,39 @@ void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomB
     BookGenreComboBox->ItemIndex = -1;
 }
 
+void statProgressBarSet(TAdvSmoothProgressBar *bar, TComboBox *cbbox) {
+	bar->Position = stoi(currProgress(cbbox->ItemIndex));
+}
+
+void setPrecentageLabel(TLabel *label, TComboBox *cbbox) {
+	string tempStr = currProgress(cbbox->ItemIndex) + "%\n" + to_string(userBooks[cbbox->ItemIndex].currPage) + " pages of " + to_string(userBooks[cbbox->ItemIndex].bookLength);
+	label->Caption = tempStr.c_str();
+}
+
 void __fastcall TMainForm::BookListChange(TObject *Sender)
 {
-	BookmarkEdit->Text = userBooks[BookList->ItemIndex].bookmark;
+	statProgressBarSet(ReadProgressBar, BookList);
+	setPrecentageLabel(ProgressLabel2, BookList);
+	LogUpButton->Enabled = BookList->ItemIndex != -1;
+    LogDownButton->Enabled = BookList->ItemIndex != -1;
 }
 
 void __fastcall TMainForm::LogUpButtonClick(TObject *Sender)
 {
 	string output = returnStr(LogEdit->Text);
-	currentGoalStat += stoi(output.c_str());
+	userBooks[BookList->ItemIndex].currPage += stoi(output.c_str());
 	setLogEdit(LogEdit);
-	saveFilePref();
-	setProgress(DailyProgressBar, ReportLabel1);
+	statProgressBarSet(ReadProgressBar, BookList);
+	rewriteFileData();
+	setPrecentageLabel(ProgressLabel2, BookList);
 }
 
 void __fastcall TMainForm::LogDownButtonClick(TObject *Sender)
 {
 	string output = returnStr(LogEdit->Text);
-	currentGoalStat -= stoi(output.c_str());
+	userBooks[BookList->ItemIndex].currPage -= stoi(output.c_str());
 	setLogEdit(LogEdit);
-	saveFilePref();
-	setProgress(DailyProgressBar, ReportLabel1);
+	statProgressBarSet(ReadProgressBar, BookList);
+	rewriteFileData();
+	setPrecentageLabel(ProgressLabel2, BookList);
 }

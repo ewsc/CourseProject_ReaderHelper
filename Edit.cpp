@@ -38,7 +38,7 @@ void __fastcall TEditForm::FormActivate(TObject *Sender)
 	BookAuthorEdit1->Text = userBooks[rowId - 1].bookAuthor.c_str();
 	CustomBookGenre->Text = userBooks[rowId - 1].genre.c_str();
 	setAddNewComboBox(BookGenreComboBox);
-	IsFinishedCheckbox->Checked = userBooks[rowId - 1].isFinished;
+	//IsFinishedCheckbox->Checked = userBooks[rowId - 1].isFinished;
 }
 //---------------------------------------------------------------------------
 
@@ -64,13 +64,14 @@ void __fastcall TEditForm::EditButton1Click(TObject *Sender)
 	else {
 		newBook.genre = returnStr(BookGenreComboBox->Text);
 	}
-	newBook.isFinished = IsFinishedCheckbox->Checked;
 
-	if (newBook.isFinished ) {
-		long int t = static_cast<long int> (time(0));
-		string finishedReadingTime = to_string(t);
-		newBook.finishedReading = finishedReadingTime;
-	}
+	//newBook.isFinished = IsFinishedCheckbox->Checked;
+
+//	if (newBook.isFinished ) {
+//		long int t = static_cast<long int> (time(0));
+//		string finishedReadingTime = to_string(t);
+//		newBook.finishedReading = finishedReadingTime;
+//	}
 	userBooks[rowId - 1] = newBook;
 	MainForm->aEditItem->Execute();
     Close();

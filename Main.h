@@ -55,24 +55,15 @@ class TMainForm : public TForm
 __published:	// IDE-managed Components
 	TPageControl *MainPageControl;
 	TTabSheet *ActionsSheet;
-	TTabSheet *BookmarksSheet;
+	TTabSheet *ProgressSheet;
 	TTabSheet *HistorySheet;
 	TTabSheet *SettingsSheet;
 	TTabSheet *ReportsSheet;
-	TLabel *ReportLabel1;
-	TLabel *ReportLabel2;
-	TAdvSmoothProgressBar *DailyProgressBar;
-	TMemo *BookmarksMemo;
 	TComboBox *BookList;
-	TEdit *BookmarkEdit;
-	TButton *EditButton;
-	TLabel *BookmarkLabel1;
+	TLabel *ProgressLabel1;
 	TStringGrid *HistoryGrid;
 	TLabel *HistoryLabel1;
 	TLabel *ReportLabel3;
-	TEdit *LogEdit;
-	TButton *LogUpButton;
-	TButton *LogDownButton;
 	TTabSheet *AddNewSheet;
 	TApplicationEvents *MainApplicationEvents;
 	TImageList *MainImageList;
@@ -92,9 +83,13 @@ __published:	// IDE-managed Components
 	TMemo *ReadStatMemo;
 	TLabel *ReportLabel4;
 	TLabel *ReportLabel5;
+	TAdvSmoothProgressBar *ReadProgressBar;
+	TLabel *ProgressLabel2;
+	TEdit *LogEdit;
+	TButton *LogUpButton;
+	TButton *LogDownButton;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
-	void __fastcall EditButtonClick(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
 	void __fastcall LogDownButtonClick(TObject *Sender);
 	void __fastcall AddNewButton1Click(TObject *Sender);
@@ -126,7 +121,9 @@ typedef struct userBook{
     string genre;
 	string startedReading;
 	string finishedReading;
-    bool isFinished;
+	//bool isFinished;
+	int currPage;
+	int bookLength;
 }userBook;
 
 //---------------------------------------------------------------------------

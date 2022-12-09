@@ -29,12 +29,8 @@ namespace fs = std::filesystem;
 
 const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
-const string preferenceFilePath = "preferences.readerdata";
 const string userDataPath = "userdata.readerdata";
 const string appVersion = "0.0";
-
-int dailyGoal = 0;
-int currentGoalStat = 0;
 
 int rowId;
 
@@ -55,14 +51,12 @@ void __fastcall AddNewButton1Click(TObject *Sender);
 //UserControls.cpp
 void setAddNewComboBox(TComboBox *comboBox);
 void fillComboBox(TComboBox *comboBox);
-void updateMemo(TMemo *bookmarksMemo);
 void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel);
 void setLogEdit(TEdit *edit);
 void setStringGrid(TStringGrid *grid, int clWIdth, int gridWidth, int height);
 void drawFixedRows(TStringGrid *grid);
 void clearStringGrid(TStringGrid *grid);
 void updateStringGrid(TStringGrid *grid);
-void __fastcall EditButtonClick(TObject *Sender);
 void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox);
 void __fastcall BookListChange(TObject *Sender);
 void __fastcall LogUpButtonClick(TObject *Sender);
@@ -70,10 +64,6 @@ void __fastcall LogDownButtonClick(TObject *Sender);
 void deleteRow(TStringGrid *grid);
 void setReadingStat(TMemo *memo);
 void printReadingStat(TLabel *label);
-
-//UserPreferences.cpp
-void saveFilePref();
-void getDailyGoal();
 
 //Edit.cpp
 void fillForm(TEdit *bookName, TEdit *authorName, TEdit *customGenre, TComboBox *genre);
@@ -103,14 +93,10 @@ bool checkFirstLaunch() {
 	return isFirstLaunch;
 }
 
-void importBookMarks(TMemo *bookmarksMemo, TComboBox *comboBox) {
-	fillComboBox(comboBox);
-	updateMemo(bookmarksMemo);
-}
 
-void updateDisplays(TComboBox *genreComboBox, TMemo *bookmarkMemo, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label) {
+void updateDisplays(TComboBox *genreComboBox, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label) {
 	setAddNewComboBox(genreComboBox);
-	importBookMarks(bookmarkMemo, booksComboBox);
+	fillComboBox(booksComboBox);
 	updateStringGrid(historyGrid);
 	setReadingStat(statMemo);
 	printReadingStat(label);
@@ -129,12 +115,10 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	   Form->ShowModal();
    }
    setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
-   getDailyGoal();
    getUserData();
    setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
-   setProgress(DailyProgressBar, ReportLabel1);
    setLogEdit(LogEdit);
-   updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+   updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 }
 
 string returnStr(AnsiString output) {
@@ -172,14 +156,14 @@ void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 void __fastcall TMainForm::aDeleteItemExecute(TObject *Sender)
 {
 	deleteRow(HistoryGrid);
-	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+	updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
 {
-    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+    updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------
