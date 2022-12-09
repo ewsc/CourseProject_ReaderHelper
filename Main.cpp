@@ -69,6 +69,7 @@ void __fastcall LogUpButtonClick(TObject *Sender);
 void __fastcall LogDownButtonClick(TObject *Sender);
 void deleteRow(TStringGrid *grid);
 void setReadingStat(TMemo *memo);
+void printReadingStat(TLabel *label);
 
 //UserPreferences.cpp
 void saveFilePref();
@@ -107,11 +108,12 @@ void importBookMarks(TMemo *bookmarksMemo, TComboBox *comboBox) {
 	updateMemo(bookmarksMemo);
 }
 
-void updateDisplays(TComboBox *genreComboBox, TMemo *bookmarkMemo, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo) {
+void updateDisplays(TComboBox *genreComboBox, TMemo *bookmarkMemo, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label) {
 	setAddNewComboBox(genreComboBox);
 	importBookMarks(bookmarkMemo, booksComboBox);
 	updateStringGrid(historyGrid);
 	setReadingStat(statMemo);
+	printReadingStat(label);
 }
 
 void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
@@ -132,8 +134,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
    setProgress(DailyProgressBar, ReportLabel1);
    setLogEdit(LogEdit);
-   setReadingStat(ReadStatMemo);
-   updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo);
+   updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 }
 
 string returnStr(AnsiString output) {
@@ -171,14 +172,14 @@ void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 void __fastcall TMainForm::aDeleteItemExecute(TObject *Sender)
 {
 	deleteRow(HistoryGrid);
-	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo);
+	updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
 {
-    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo);
+    updateDisplays(BookGenreComboBox, BookmarksMemo, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------

@@ -91,6 +91,7 @@ __published:	// IDE-managed Components
 	TAction *aEditItem;
 	TMemo *ReadStatMemo;
 	TLabel *ReportLabel4;
+	TLabel *ReportLabel5;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall EditButtonClick(TObject *Sender);

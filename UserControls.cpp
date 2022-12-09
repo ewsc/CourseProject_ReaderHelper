@@ -17,6 +17,8 @@ extern vector<userBook> userBooks;
 extern int dailyGoal;
 extern int currentGoalStat;
 
+vector<double> readingTime;
+
 const int seconds_per_day = 60*60*24;
 
 //Main.cpp
@@ -127,6 +129,49 @@ void clearStringGrid(TStringGrid *grid) {
 	}
 }
 
+void fillStatArr() {
+	readingTime.clear();
+    for (int i = 0; i < userBooks.size(); i++) {
+		if (userBooks[i].startedReading != "0" && userBooks[i].finishedReading != "0") {
+			time_t finTime = stoi(userBooks[i].finishedReading.c_str());
+			time_t startTime = stoi(userBooks[i].startedReading.c_str());
+			double hours = difftime(finTime, startTime) / 60 / 60;
+			readingTime.push_back(hours);
+		}
+	}
+}
+
+double getAverage() {
+	double sum = 0;
+	int i;
+	if (readingTime.size() > 0) {
+		for (i = 0; i < readingTime.size(); i++) {
+			sum += readingTime[i];
+		}
+		return ((double)sum / i);
+	}
+    return 0;
+}
+
+double getTotal() {
+	double sum = 0;;
+	for (int i = 0; i < readingTime.size(); i++) {
+		sum += readingTime[i];
+	}
+	return sum;
+}
+
+void printReadingStat(TLabel *label) {
+	fillStatArr();
+	double weeklyAverage = getAverage();
+	double totalHours = getTotal();
+    stringstream stream;
+	stream << "Average book reading time: " << fixed << setprecision(2) << weeklyAverage << " hours" << endl << "Total reading time: " << fixed << setprecision(2) << totalHours << " hours";
+	string line = stream.str();
+
+	label->Caption = line.c_str();
+}
+
 void updateStringGrid(TStringGrid *grid) {
 	clearStringGrid(grid);
 	drawFixedRows(grid);
@@ -137,7 +182,7 @@ void updateStringGrid(TStringGrid *grid) {
 		grid->Cells[3][i+1] = userBooks[i].genre.c_str();
 
 		if (!userBooks[i].isFinished) {
-			grid->Cells[4][i+1] = "Still reading";
+			grid->Cells[4][i+1] = "—";
 		}
 		else {
 			time_t finTime = stoi(userBooks[i].finishedReading.c_str());

@@ -5725,7 +5725,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 302
-    ActivePage = AddNewSheet
+    ActivePage = ReportsSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0
@@ -5852,6 +5852,13 @@ object MainForm: TMainForm
         Height = 14
         Caption = 'Reading Time'
       end
+      object ReportLabel5: TLabel
+        Left = 0
+        Top = 215
+        Width = 148
+        Height = 14
+        Caption = 'Average book reading time:'
+      end
       object DailyProgressBar: TAdvSmoothProgressBar
         Left = 3
         Top = 56
@@ -5922,7 +5929,7 @@ object MainForm: TMainForm
         OnClick = LogDownButtonClick
       end
       object ReadStatMemo: TMemo
-        Left = 3
+        Left = 0
         Top = 120
         Width = 390
         Height = 89
