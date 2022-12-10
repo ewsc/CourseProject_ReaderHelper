@@ -54,10 +54,8 @@ class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
 	TPageControl *MainPageControl;
-	TTabSheet *ActionsSheet;
 	TTabSheet *ProgressSheet;
 	TTabSheet *HistorySheet;
-	TTabSheet *SettingsSheet;
 	TTabSheet *ReportsSheet;
 	TComboBox *BookList;
 	TLabel *ProgressLabel1;
@@ -88,6 +86,8 @@ __published:	// IDE-managed Components
 	TEdit *LogEdit;
 	TButton *LogUpButton;
 	TButton *LogDownButton;
+	TEdit *BookLenghtEdit1;
+	TLabel *AddNewLabel6;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);

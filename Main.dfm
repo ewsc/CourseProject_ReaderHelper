@@ -5725,13 +5725,10 @@ object MainForm: TMainForm
     Top = 0
     Width = 500
     Height = 302
-    ActivePage = ReportsSheet
+    ActivePage = ProgressSheet
     MultiLine = True
     ScrollOpposite = True
     TabOrder = 0
-    object ActionsSheet: TTabSheet
-      Caption = 'Actions'
-    end
     object AddNewSheet: TTabSheet
       Caption = 'Add New'
       ImageIndex = 5
@@ -5776,6 +5773,13 @@ object MainForm: TMainForm
         Height = 14
         Caption = 'or'
       end
+      object AddNewLabel6: TLabel
+        Left = 0
+        Top = 164
+        Width = 97
+        Height = 14
+        Caption = 'Input book length'
+      end
       object BookNameEdit1: TEdit
         Left = 0
         Top = 56
@@ -5813,6 +5817,14 @@ object MainForm: TMainForm
         Caption = 'Add'
         TabOrder = 4
         OnClick = AddNewButton1Click
+      end
+      object BookLenghtEdit1: TEdit
+        Left = 0
+        Top = 184
+        Width = 185
+        Height = 22
+        NumbersOnly = True
+        TabOrder = 5
       end
     end
     object ReportsSheet: TTabSheet
@@ -6010,10 +6022,6 @@ object MainForm: TMainForm
           64
           64)
       end
-    end
-    object SettingsSheet: TTabSheet
-      Caption = 'Settings'
-      ImageIndex = 4
     end
   end
   object MainApplicationEvents: TApplicationEvents

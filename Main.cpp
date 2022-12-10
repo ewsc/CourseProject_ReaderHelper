@@ -12,7 +12,6 @@
 #include <exception>
 
 #include "Main.h"
-#include "Welcome.h"
 #include "Logs.h"
 #include "UserData.h"
 #include "UserControls.h"
@@ -79,7 +78,6 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
 bool checkFirstLaunch() {
 	bool isFirstLaunch;
-
 	fs::path filepath = string(mainFolder + "\\" + logFilePath);
 	bool filepathExists = fs::is_directory(filepath.parent_path());
 	if (filepathExists) {

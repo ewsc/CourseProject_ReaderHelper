@@ -22,6 +22,8 @@ const int seconds_per_day = 60*60*24;
 //Main.cpp
 string returnStr(AnsiString output);
 void saveFilePref();
+void updateDisplays(TComboBox *genreComboBox, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label);
+
 
 //UserData.cpp
 void rewriteFileData();
@@ -67,9 +69,13 @@ void setAddNewComboBox(TComboBox *comboBox) {
 }
 
 void fillComboBox(TComboBox *comboBox) {
-    comboBox->Items->Clear();
+	comboBox->Items->Clear();
+	comboBox->ItemIndex = -1;
+    comboBox->Text = "Select a book";
 	for (int i = 0; i < userBooks.size(); i++) {
-		comboBox->Items->Add(userBooks[i].bookName.c_str());
+		//if (userBooks[i].finishedReading == "0") {
+			comboBox->Items->Add(userBooks[i].bookName.c_str());
+		//}
 	}
 }
 
@@ -204,30 +210,86 @@ void setPrecentageLabel(TLabel *label, TComboBox *cbbox) {
 	label->Caption = tempStr.c_str();
 }
 
+void enableLoggingButtons(TButton *butt1, TButton *butt2, TComboBox *cbbox) {
+	butt1->Enabled = cbbox->ItemIndex != -1;
+	butt2->Enabled = cbbox->ItemIndex != -1;
+}
+
 void __fastcall TMainForm::BookListChange(TObject *Sender)
 {
 	statProgressBarSet(ReadProgressBar, BookList);
 	setPrecentageLabel(ProgressLabel2, BookList);
-	LogUpButton->Enabled = BookList->ItemIndex != -1;
-    LogDownButton->Enabled = BookList->ItemIndex != -1;
+	enableLoggingButtons(LogUpButton, LogDownButton, BookList);
+}
+
+
+bool checkLogability(int index, int value, bool isAdding) {
+	int currValue = userBooks[index].currPage;
+	int maxValue = userBooks[index].bookLength;
+	userBook temp = userBooks[index];
+	if (isAdding) {
+		if (currValue + value <= maxValue) {
+			return true;
+		}
+		return false;
+	}
+
+	else {
+		if (currValue - value >= 0) {
+			return true;
+		}
+		return false;
+    }
+}
+
+bool checkCompletetion(int index) {
+	if (userBooks[index].currPage == userBooks[index].bookLength) {
+		return true;
+	}
+	else {
+		return false;
+    }
+}
+
+void markAsDone(int index) {
+	if (userBooks[index].finishedReading == "0") {
+		long int t = static_cast<long int> (time(0));
+		string finishedReadingTime = to_string(t);
+		userBooks[index].finishedReading = finishedReadingTime;
+    }
 }
 
 void __fastcall TMainForm::LogUpButtonClick(TObject *Sender)
 {
-	string output = returnStr(LogEdit->Text);
-	userBooks[BookList->ItemIndex].currPage += stoi(output.c_str());
-	setLogEdit(LogEdit);
-	statProgressBarSet(ReadProgressBar, BookList);
-	rewriteFileData();
-	setPrecentageLabel(ProgressLabel2, BookList);
+	bool isEditable = checkLogability(BookList->ItemIndex, stoi(returnStr(LogEdit->Text)), true);
+	if (isEditable) {
+		string output = returnStr(LogEdit->Text);
+		userBooks[BookList->ItemIndex].currPage += stoi(output.c_str());
+		setLogEdit(LogEdit);
+		statProgressBarSet(ReadProgressBar, BookList);
+
+		if (checkCompletetion(BookList->ItemIndex)) {
+			markAsDone(BookList->ItemIndex);
+		}
+
+		rewriteFileData();
+		setPrecentageLabel(ProgressLabel2, BookList);
+		updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+		enableLoggingButtons(LogUpButton, LogDownButton, BookList);
+	}
 }
 
 void __fastcall TMainForm::LogDownButtonClick(TObject *Sender)
 {
-	string output = returnStr(LogEdit->Text);
-	userBooks[BookList->ItemIndex].currPage -= stoi(output.c_str());
-	setLogEdit(LogEdit);
-	statProgressBarSet(ReadProgressBar, BookList);
-	rewriteFileData();
-	setPrecentageLabel(ProgressLabel2, BookList);
+	bool isEditable = checkLogability(BookList->ItemIndex, stoi(returnStr(LogEdit->Text)), false);
+	if (isEditable) {
+		string output = returnStr(LogEdit->Text);
+		userBooks[BookList->ItemIndex].currPage -= stoi(output.c_str());
+		setLogEdit(LogEdit);
+		statProgressBarSet(ReadProgressBar, BookList);
+		rewriteFileData();
+		setPrecentageLabel(ProgressLabel2, BookList);
+		updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+        enableLoggingButtons(LogUpButton, LogDownButton, BookList);
+	}
 }

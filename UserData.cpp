@@ -95,10 +95,9 @@ void __fastcall TMainForm::AddNewButton1Click(TObject *Sender)
 	newBook.startedReading = startedReadingTime;
 
 	newBook.finishedReading = "0";
-	//newBook.isFinished = false;
 	newBook.bookmark = 0;
 	newBook.currPage = 0;
-	newBook.bookLength = 0;
+	newBook.bookLength = stoi(returnStr(BookLenghtEdit1->Text));
 
 	userBooks.push_back(newBook);
 	rewriteFileData();

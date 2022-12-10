@@ -66,12 +66,6 @@ void __fastcall TEditForm::EditButton1Click(TObject *Sender)
 	}
 
 	//newBook.isFinished = IsFinishedCheckbox->Checked;
-
-//	if (newBook.isFinished ) {
-//		long int t = static_cast<long int> (time(0));
-//		string finishedReadingTime = to_string(t);
-//		newBook.finishedReading = finishedReadingTime;
-//	}
 	userBooks[rowId - 1] = newBook;
 	MainForm->aEditItem->Execute();
     Close();
