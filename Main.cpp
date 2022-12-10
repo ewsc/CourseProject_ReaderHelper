@@ -20,6 +20,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "AdvSmoothProgressBar"
+#pragma link "AdvSmoothTabPager"
 #pragma resource "*.dfm"
 #pragma comment(lib, "shell32.lib")
 
@@ -108,7 +109,7 @@ void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
    bool isFirstLaunch = checkFirstLaunch();
-   setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
+   //setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
    getUserData();
    setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
    setLogEdit(LogEdit);
@@ -129,12 +130,6 @@ void __fastcall TMainForm::MainApplicationEventsException(TObject *Sender, Excep
 	addLogLine(returnStr(E->Message));
 }
 
-void __fastcall TMainForm::FormResize(TObject *Sender)
-{
-	setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
-	setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TMainForm::HistoryGridDblClick(TObject *Sender)
 {
@@ -161,4 +156,6 @@ void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
 	rewriteFileData();
 }
 //---------------------------------------------------------------------------
+
+
 

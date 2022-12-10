@@ -19,6 +19,7 @@
 #include <Vcl.AppEvnts.hpp>
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
+#include "AdvSmoothTabPager.hpp"
 #include <string>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -53,18 +54,20 @@
 class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
-	TPageControl *MainPageControl;
-	TTabSheet *ProgressSheet;
-	TTabSheet *HistorySheet;
-	TTabSheet *ReportsSheet;
-	TComboBox *BookList;
-	TLabel *ProgressLabel1;
-	TStringGrid *HistoryGrid;
-	TLabel *HistoryLabel1;
-	TLabel *ReportLabel3;
-	TTabSheet *AddNewSheet;
 	TApplicationEvents *MainApplicationEvents;
 	TImageList *MainImageList;
+	TActionList *MainActionList;
+	TAction *aDeleteItem;
+	TAction *aEditItem;
+	TAdvSmoothTabPager *SmoothTabPager;
+	TAdvSmoothTabPage *AddNewSheet;
+	TAdvSmoothTabPage *ReportSheet;
+	TAdvSmoothTabPage *ProgressSheet;
+	TAdvSmoothTabPage *HistorySheet;
+	TLabel *HistoryLabel1;
+	TStringGrid *HistoryGrid;
+	TEdit *BookLenghtEdit1;
+	TLabel *AddNewLabel6;
 	TEdit *BookNameEdit1;
 	TEdit *BookAuthorEdit1;
 	TComboBox *BookGenreComboBox;
@@ -75,29 +78,29 @@ __published:	// IDE-managed Components
 	TLabel *AddNewLabel3;
 	TLabel *AddNewLabel4;
 	TLabel *AddNewLabel5;
-	TActionList *MainActionList;
-	TAction *aDeleteItem;
-	TAction *aEditItem;
-	TMemo *ReadStatMemo;
-	TLabel *ReportLabel4;
-	TLabel *ReportLabel5;
-	TAdvSmoothProgressBar *ReadProgressBar;
+	TLabel *ProgressLabel1;
 	TLabel *ProgressLabel2;
+	TComboBox *BookList;
+	TAdvSmoothProgressBar *ReadProgressBar;
 	TEdit *LogEdit;
 	TButton *LogUpButton;
 	TButton *LogDownButton;
-	TEdit *BookLenghtEdit1;
-	TLabel *AddNewLabel6;
+	TMemo *ReadStatMemo;
+	TLabel *ReportLabel5;
+	TLabel *ReportLabel4;
+	TLabel *ReportLabel3;
+	TLabel *ProgressLabel3;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
 	void __fastcall LogDownButtonClick(TObject *Sender);
 	void __fastcall AddNewButton1Click(TObject *Sender);
 	void __fastcall MainApplicationEventsException(TObject *Sender, Exception *E);
-	void __fastcall FormResize(TObject *Sender);
 	void __fastcall HistoryGridDblClick(TObject *Sender);
 	void __fastcall aDeleteItemExecute(TObject *Sender);
 	void __fastcall aEditItemExecute(TObject *Sender);
+
+
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
