@@ -29,7 +29,7 @@ namespace fs = std::filesystem;
 const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
 const string userDataPath = "userdata.readerdata";
-const string appVersion = "0.0";
+const string appVersion = "0.5";
 
 int rowId;
 

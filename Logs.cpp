@@ -17,14 +17,18 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
-void createLogFile() {
+string returnCurrTime() {
 	time_t now = time(0);
-	string launchTime = ctime(&now);
-	launchTime[launchTime.length() - 1] = ' ';
+	tm* tmNow = localtime(&now);
+	char tempLine[100];
+	strftime(tempLine, 50, "%H:%M:%S %d.%m.%Y", tmNow);
+	return (tempLine);
+}
 
+void createLogFile() {
 	ofstream logFile(mainFolder + "\\" + logFilePath);
 	logFile << "ReaderHelper v." + appVersion << endl;
-	logFile << "Last Launched: [" + launchTime + "]" << endl;
+	logFile << "Last Launched: [" + returnCurrTime() + "]" << endl;
 	logFile.close();
 }
 
@@ -32,10 +36,6 @@ void addLogLine(string exception) {
 	ofstream logFile;
 	logFile.open(mainFolder + "\\" + logFilePath, ios_base::app);
 
-    time_t now = time(0);
-	string errTime = ctime(&now);
-	errTime[errTime.length() - 1] = ' ';
-
-	logFile << "[" << errTime << "]" << exception << ";" << endl;
+	logFile << "[" << returnCurrTime() << "]" << exception << ";" << endl;
 	logFile.close();
 }
