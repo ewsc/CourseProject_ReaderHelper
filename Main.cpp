@@ -21,6 +21,7 @@
 #pragma package(smart_init)
 #pragma link "AdvSmoothProgressBar"
 #pragma link "AdvSmoothTabPager"
+#pragma link "AdvSmoothSlider"
 #pragma resource "*.dfm"
 #pragma comment(lib, "shell32.lib")
 
@@ -158,4 +159,18 @@ void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
+void __fastcall TMainForm::AdvSmoothSlider1StateChanged(TObject *Sender, TAdvSmoothSliderState State,
+          double Value)
+{
+	if (SmoothTabPager->UIStyle == tsOffice2019White) {
+		SmoothTabPager->UIStyle = tsOffice2019Black;
+		MainForm->Font->Color = clWhite;
+	}
+	else {
+		SmoothTabPager->UIStyle = tsOffice2019White;
+        MainForm->Font->Color = clWindowText;
+    }
+}
+//---------------------------------------------------------------------------
 

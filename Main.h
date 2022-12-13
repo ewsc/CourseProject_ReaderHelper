@@ -20,6 +20,7 @@
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
 #include "AdvSmoothTabPager.hpp"
+#include "AdvSmoothSlider.hpp"
 #include <string>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -90,6 +91,10 @@ __published:	// IDE-managed Components
 	TLabel *ReportLabel4;
 	TLabel *ReportLabel3;
 	TLabel *ProgressLabel3;
+	TAdvSmoothTabPage *SettingsSheet;
+	TLabel *SettingsLabel1;
+	TAdvSmoothSlider *AdvSmoothSlider1;
+	TLabel *SettingsLabel2;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
@@ -99,6 +104,8 @@ __published:	// IDE-managed Components
 	void __fastcall HistoryGridDblClick(TObject *Sender);
 	void __fastcall aDeleteItemExecute(TObject *Sender);
 	void __fastcall aEditItemExecute(TObject *Sender);
+	void __fastcall AdvSmoothSlider1StateChanged(TObject *Sender, TAdvSmoothSliderState State,
+          double Value);
 
 
 private:	// User declarations
