@@ -5738,7 +5738,7 @@ object MainForm: TMainForm
     Fill.ShadowOffset = 0
     Fill.Glow = gmNone
     Transparent = False
-    ActivePage = AddNewSheet
+    ActivePage = SettingsSheet
     Color = clAppWorkSpace
     Images = MainImageList
     TabPosition = tpBottomCenter
@@ -5770,7 +5770,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = [fsBold]
+      TabAppearance.Appearance.Font.Style = []
       TabAppearance.Appearance.FocusColor = clHighlight
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
@@ -5811,19 +5811,6 @@ object MainForm: TMainForm
         Height = 14
         Caption = 'Input book length'
       end
-      object AddNewLabel1: TLabel
-        Left = 5
-        Top = 5
-        Width = 76
-        Height = 24
-        Caption = 'Add New'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
-      end
       object AddNewLabel2: TLabel
         Left = 21
         Top = 35
@@ -5851,6 +5838,13 @@ object MainForm: TMainForm
         Width = 11
         Height = 14
         Caption = 'or'
+      end
+      object AddNewLabel1: TLabel
+        Left = 5
+        Top = 5
+        Width = 48
+        Height = 14
+        Caption = 'Add New'
       end
       object BookLenghtEdit1: TEdit
         Left = 21
@@ -5967,18 +5961,12 @@ object MainForm: TMainForm
         Height = 14
         Caption = 'Finished Books'
       end
-      object ReportLabel3: TLabel
+      object Label2: TLabel
         Left = 5
         Top = 5
-        Width = 57
-        Height = 24
+        Width = 36
+        Height = 14
         Caption = 'Report'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
       end
       object ReadStatMemo: TMemo
         Left = -2
@@ -6052,19 +6040,6 @@ object MainForm: TMainForm
       TabAppearance.ColorTextHot = clHighlight
       TabAppearance.ColorTextSelected = clHighlight
       TMSStyle = 0
-      object ProgressLabel1: TLabel
-        Left = 5
-        Top = 5
-        Width = 142
-        Height = 24
-        Caption = 'Reading Progress'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
-      end
       object ProgressLabel2: TLabel
         Left = 360
         Top = 36
@@ -6073,11 +6048,25 @@ object MainForm: TMainForm
         Caption = 'Select a Book'
       end
       object ProgressLabel3: TLabel
-        Left = 75
-        Top = 95
-        Width = 91
+        Left = 21
+        Top = 99
+        Width = 108
         Height = 14
-        Caption = 'Add new page(s)'
+        Caption = 'Add new page(s) to:'
+      end
+      object ProgressLabel4: TLabel
+        Left = 21
+        Top = 163
+        Width = 131
+        Height = 14
+        Caption = 'Show reading stat chart:'
+      end
+      object Label1: TLabel
+        Left = 5
+        Top = 5
+        Width = 94
+        Height = 14
+        Caption = 'Reading Progress'
       end
       object BookList: TComboBox
         Left = 21
@@ -6168,6 +6157,15 @@ object MainForm: TMainForm
         TabOrder = 4
         OnClick = LogDownButtonClick
       end
+      object ProgressButton1: TButton
+        Left = 184
+        Top = 159
+        Width = 75
+        Height = 25
+        Caption = 'Show'
+        TabOrder = 5
+        OnClick = ProgressButton1Click
+      end
     end
     object HistorySheet: TAdvSmoothTabPage
       Left = 1
@@ -6223,24 +6221,19 @@ object MainForm: TMainForm
       TabAppearance.ColorTextHot = clHighlight
       TabAppearance.ColorTextSelected = clHighlight
       TMSStyle = 0
-      object HistoryLabel1: TLabel
+      object HistoryLabel: TLabel
         Left = 5
         Top = 5
-        Width = 59
-        Height = 24
+        Width = 38
+        Height = 14
         Caption = 'History'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
       end
       object HistoryGrid: TStringGrid
-        Left = 0
-        Top = 35
-        Width = 491
-        Height = 231
+        Left = 1
+        Top = 25
+        Width = 494
+        Height = 221
+        Align = alCustom
         DefaultColAlignment = taCenter
         RowCount = 2
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
@@ -6276,7 +6269,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = []
+      TabAppearance.Appearance.Font.Style = [fsBold]
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
       TabAppearance.Appearance.ImageList = MainImageList
@@ -6309,19 +6302,6 @@ object MainForm: TMainForm
       TabAppearance.ColorTextHot = 4474440
       TabAppearance.ColorTextSelected = 4474440
       TMSStyle = 0
-      object SettingsLabel1: TLabel
-        Left = 5
-        Top = 5
-        Width = 64
-        Height = 24
-        Caption = 'Settings'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -20
-        Font.Name = 'Calibri'
-        Font.Style = []
-        ParentFont = False
-      end
       object SettingsLabel2: TLabel
         Left = 33
         Top = 55
@@ -6329,8 +6309,37 @@ object MainForm: TMainForm
         Height = 14
         Caption = 'Dark Mode:'
       end
+      object SettingsLabel3: TLabel
+        Left = 33
+        Top = 99
+        Width = 76
+        Height = 14
+        Caption = 'Audio stream:'
+      end
+      object SettingsLabel1: TLabel
+        Left = 5
+        Top = 5
+        Width = 42
+        Height = 14
+        Caption = 'Settings'
+      end
+      object SettingsLabel4: TLabel
+        Left = 33
+        Top = 126
+        Width = 314
+        Height = 11
+        Caption = 
+          'Hint: If playback does not started, check your internet connecti' +
+          'on or audiostream link'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
       object AdvSmoothSlider1: TAdvSmoothSlider
-        Left = 111
+        Left = 120
         Top = 47
         Width = 80
         Height = 30
@@ -6438,7 +6447,34 @@ object MainForm: TMainForm
         TabOrder = 0
         TMSStyle = 0
       end
+      object PlayButton: TButton
+        Left = 294
+        Top = 95
+        Width = 43
+        Height = 25
+        Caption = 'Play'
+        TabOrder = 1
+        OnClick = PlayButtonClick
+      end
     end
+  end
+  object RadioEdit1: TEdit
+    Left = 121
+    Top = 98
+    Width = 168
+    Height = 22
+    TabOrder = 1
+    Text = 'https://ssl.hdradios.net:6858/'
+    OnChange = RadioEdit1Change
+  end
+  object PauseButton: TButton
+    Left = 344
+    Top = 97
+    Width = 43
+    Height = 25
+    Caption = 'Pause'
+    TabOrder = 2
+    OnClick = PauseButtonClick
   end
   object MainApplicationEvents: TApplicationEvents
     OnException = MainApplicationEventsException

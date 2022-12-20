@@ -51,21 +51,18 @@
 #include <vector>
 #include <exception>
 #include <iomanip>
+#include "bass.h"
 //---------------------------------------------------------------------------
 class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
 	TApplicationEvents *MainApplicationEvents;
 	TImageList *MainImageList;
-	TActionList *MainActionList;
-	TAction *aDeleteItem;
-	TAction *aEditItem;
 	TAdvSmoothTabPager *SmoothTabPager;
 	TAdvSmoothTabPage *AddNewSheet;
 	TAdvSmoothTabPage *ReportSheet;
 	TAdvSmoothTabPage *ProgressSheet;
 	TAdvSmoothTabPage *HistorySheet;
-	TLabel *HistoryLabel1;
 	TStringGrid *HistoryGrid;
 	TEdit *BookLenghtEdit1;
 	TLabel *AddNewLabel6;
@@ -74,12 +71,10 @@ __published:	// IDE-managed Components
 	TComboBox *BookGenreComboBox;
 	TEdit *CustomBookGenre;
 	TButton *AddNewButton1;
-	TLabel *AddNewLabel1;
 	TLabel *AddNewLabel2;
 	TLabel *AddNewLabel3;
 	TLabel *AddNewLabel4;
 	TLabel *AddNewLabel5;
-	TLabel *ProgressLabel1;
 	TLabel *ProgressLabel2;
 	TComboBox *BookList;
 	TAdvSmoothProgressBar *ReadProgressBar;
@@ -89,12 +84,25 @@ __published:	// IDE-managed Components
 	TMemo *ReadStatMemo;
 	TLabel *ReportLabel5;
 	TLabel *ReportLabel4;
-	TLabel *ReportLabel3;
 	TLabel *ProgressLabel3;
 	TAdvSmoothTabPage *SettingsSheet;
-	TLabel *SettingsLabel1;
 	TAdvSmoothSlider *AdvSmoothSlider1;
 	TLabel *SettingsLabel2;
+	TButton *ProgressButton1;
+	TLabel *ProgressLabel4;
+	TLabel *Label1;
+	TLabel *Label2;
+	TAction *aDeleteItem;
+	TAction *aEditItem;
+	TActionList *MainActionList;
+	TLabel *SettingsLabel3;
+	TButton *PlayButton;
+	TLabel *SettingsLabel1;
+	TLabel *AddNewLabel1;
+	TLabel *HistoryLabel;
+	TEdit *RadioEdit1;
+	TButton *PauseButton;
+	TLabel *SettingsLabel4;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
@@ -106,6 +114,10 @@ __published:	// IDE-managed Components
 	void __fastcall aEditItemExecute(TObject *Sender);
 	void __fastcall AdvSmoothSlider1StateChanged(TObject *Sender, TAdvSmoothSliderState State,
           double Value);
+	void __fastcall ProgressButton1Click(TObject *Sender);
+	void __fastcall PlayButtonClick(TObject *Sender);
+	void __fastcall PauseButtonClick(TObject *Sender);
+	void __fastcall RadioEdit1Change(TObject *Sender);
 
 
 private:	// User declarations
@@ -131,7 +143,6 @@ typedef struct userBook{
     string genre;
 	string startedReading;
 	string finishedReading;
-	//bool isFinished;
 	int currPage;
 	int bookLength;
 }userBook;
