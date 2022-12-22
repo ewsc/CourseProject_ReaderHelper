@@ -51,6 +51,7 @@ void getGenreArray() {
 void drawBars(TImage *Image) {
 	int xAxix = 10;
 	int yAxix = 300;
+    Image->Picture = NULL;
 
 	for (int i = 0; i < genreVector.size(); i++) {
 		Image->Canvas->Brush->Color = clSkyBlue;

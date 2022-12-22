@@ -35,7 +35,6 @@ const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
 const string userDataPath = "userdata.readerdata";
 const string appVersion = "0.5";
-HSTREAM audiostream;
 
 int rowId;
 
@@ -54,7 +53,7 @@ void getUserData();
 void __fastcall AddNewButton1Click(TObject *Sender);
 
 //UserControls.cpp
-void setAddNewComboBox(TComboBox *comboBox);
+void setAddNewComboBox(TComboBox *comboBox, string selected);
 void fillComboBox(TComboBox *comboBox);
 void setProgress(TAdvSmoothProgressBar *progressBar, TLabel *reportLabel);
 void setLogEdit(TEdit *edit);
@@ -62,7 +61,7 @@ void setStringGrid(TStringGrid *grid, int clWIdth, int gridWidth, int height);
 void drawFixedRows(TStringGrid *grid);
 void clearStringGrid(TStringGrid *grid);
 void updateStringGrid(TStringGrid *grid);
-void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox);
+void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox, TEdit *BookLenghtEdit1);
 void __fastcall BookListChange(TObject *Sender);
 void __fastcall LogUpButtonClick(TObject *Sender);
 void __fastcall LogDownButtonClick(TObject *Sender);
@@ -73,6 +72,10 @@ void printReadingStat(TLabel *label);
 //Edit.cpp
 void fillForm(TEdit *bookName, TEdit *authorName, TEdit *customGenre, TComboBox *genre);
 
+//AudioStream.cpp
+void __fastcall PlayButtonClick(TObject *Sender);
+void __fastcall PauseButtonClick(TObject *Sender);
+void __fastcall RadioEdit1Change(TObject *Sender);
 
 TMainForm *MainForm;
 //---------------------------------------------------------------------------
@@ -99,7 +102,8 @@ bool checkFirstLaunch() {
 
 
 void updateDisplays(TComboBox *genreComboBox, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label) {
-	setAddNewComboBox(genreComboBox);
+	string tempBlanckLine = "";
+	setAddNewComboBox(genreComboBox, tempBlanckLine);
 	fillComboBox(booksComboBox);
 	updateStringGrid(historyGrid);
 	setReadingStat(statMemo);
@@ -114,7 +118,6 @@ void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
    bool isFirstLaunch = checkFirstLaunch();
-   //setTabsLenght(MainPageControl, MainForm->ClientWidth, MainForm->ClientHeight);
    getUserData();
    setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
    setLogEdit(LogEdit);
@@ -184,24 +187,4 @@ void __fastcall TMainForm::ProgressButton1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMainForm::PlayButtonClick(TObject *Sender)
-{
-	string link = returnStr(RadioEdit1->Text);
-	BASS_Init(-1, 44100, BASS_DEVICE_3D, 0, NULL);
-	audiostream = BASS_StreamCreateURL(PAnsiChar(link.c_str()), 0, 0, NULL, 0);
-	BASS_ChannelPlay(audiostream, false);
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::PauseButtonClick(TObject *Sender)
-{
-    BASS_ChannelPause(audiostream);
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::RadioEdit1Change(TObject *Sender)
-{
-	PlayButton->Enabled = returnStr(RadioEdit1->Text).length != 0;
-}
-//---------------------------------------------------------------------------
 

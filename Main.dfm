@@ -5738,7 +5738,7 @@ object MainForm: TMainForm
     Fill.ShadowOffset = 0
     Fill.Glow = gmNone
     Transparent = False
-    ActivePage = SettingsSheet
+    ActivePage = AddNewSheet
     Color = clAppWorkSpace
     Images = MainImageList
     TabPosition = tpBottomCenter
@@ -5770,7 +5770,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = []
+      TabAppearance.Appearance.Font.Style = [fsBold]
       TabAppearance.Appearance.FocusColor = clHighlight
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
@@ -6269,7 +6269,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = [fsBold]
+      TabAppearance.Appearance.Font.Style = []
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
       TabAppearance.Appearance.ImageList = MainImageList
@@ -6456,25 +6456,25 @@ object MainForm: TMainForm
         TabOrder = 1
         OnClick = PlayButtonClick
       end
+      object PauseButton: TButton
+        Left = 343
+        Top = 95
+        Width = 43
+        Height = 25
+        Caption = 'Pause'
+        TabOrder = 2
+        OnClick = PauseButtonClick
+      end
+      object RadioEdit1: TEdit
+        Left = 120
+        Top = 96
+        Width = 168
+        Height = 22
+        TabOrder = 3
+        Text = 'https://ssl.hdradios.net:6858/'
+        OnChange = RadioEdit1Change
+      end
     end
-  end
-  object RadioEdit1: TEdit
-    Left = 121
-    Top = 98
-    Width = 168
-    Height = 22
-    TabOrder = 1
-    Text = 'https://ssl.hdradios.net:6858/'
-    OnChange = RadioEdit1Change
-  end
-  object PauseButton: TButton
-    Left = 344
-    Top = 97
-    Width = 43
-    Height = 25
-    Caption = 'Pause'
-    TabOrder = 2
-    OnClick = PauseButtonClick
   end
   object MainApplicationEvents: TApplicationEvents
     OnException = MainApplicationEventsException

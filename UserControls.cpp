@@ -52,7 +52,7 @@ bool genreIsAlreadyAdded(string compareStr, TComboBox *comboBox) {
 	return false;
 }
 
-void setAddNewComboBox(TComboBox *comboBox) {
+void setAddNewComboBox(TComboBox *comboBox, string selected) {
 	comboBox->Items->Clear();
 	for (int i = 0; i < userBooks.size(); i++) {
 		bool isAlreadyAdded;
@@ -64,6 +64,9 @@ void setAddNewComboBox(TComboBox *comboBox) {
         }
 		if (!isAlreadyAdded) {
 			comboBox->Items->Add(userBooks[i].genre.c_str());
+            if (selected == userBooks[i].genre.c_str()) {
+				comboBox->ItemIndex = comboBox->Items->Count - 1;
+			}
 		}
 	}
 }
@@ -194,10 +197,11 @@ void setReadingStat(TMemo *memo) {
     }
 }
 
-void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox) {
+void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox, TEdit *BookLengthEdit1) {
 	BookNameEdit1->Text = "";
 	BookAuthorEdit1->Text = "";
 	CustomBookGenre->Text = "";
+    BookLengthEdit1->Text = "";
     BookGenreComboBox->ItemIndex = -1;
 }
 

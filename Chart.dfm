@@ -1,9 +1,11 @@
 object ChartForm: TChartForm
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Charts'
-  ClientHeight = 316
-  ClientWidth = 522
+  ClientHeight = 238
+  ClientWidth = 418
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +20,8 @@ object ChartForm: TChartForm
   object MainImage: TImage
     Left = 0
     Top = 0
-    Width = 376
-    Height = 316
+    Width = 272
+    Height = 238
     Align = alClient
     ExplicitLeft = 8
     ExplicitTop = 8
@@ -27,15 +29,17 @@ object ChartForm: TChartForm
     ExplicitHeight = 105
   end
   object GenreMemo: TMemo
-    Left = 376
+    Left = 272
     Top = 0
     Width = 146
-    Height = 316
+    Height = 238
     Align = alRight
     Lines.Strings = (
       'GenreMemo')
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 0
+    ExplicitLeft = 376
+    ExplicitHeight = 316
   end
 end

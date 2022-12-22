@@ -19,7 +19,7 @@ extern int rowId;
 extern vector<userBook> userBooks;
 
 //UserControls.cpp
-void setAddNewComboBox(TComboBox *comboBox);
+void setAddNewComboBox(TComboBox *comboBox, string selected);
 
 //Main.cpp
 string returnStr(AnsiString output);
@@ -36,9 +36,7 @@ void __fastcall TEditForm::FormActivate(TObject *Sender)
 {
 	BookNameEdit1->Text = userBooks[rowId - 1].bookName.c_str();
 	BookAuthorEdit1->Text = userBooks[rowId - 1].bookAuthor.c_str();
-	CustomBookGenre->Text = userBooks[rowId - 1].genre.c_str();
-	setAddNewComboBox(BookGenreComboBox);
-	//IsFinishedCheckbox->Checked = userBooks[rowId - 1].isFinished;
+	setAddNewComboBox(BookGenreComboBox, userBooks[rowId - 1].genre.c_str());
 }
 //---------------------------------------------------------------------------
 

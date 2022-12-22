@@ -14,7 +14,9 @@ extern vector<userBook> userBooks;
 
 //Main.cpp
 string returnStr(AnsiString output);
-void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox);
+
+//UserControls.cpp
+void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomBookGenre, TComboBox *BookGenreComboBox, TEdit *BookLengthEdit1);
 void updateDisplays(TComboBox *genreComboBox, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label);
 
 TForm2 *Form2;
@@ -101,6 +103,6 @@ void __fastcall TMainForm::AddNewButton1Click(TObject *Sender)
 
 	userBooks.push_back(newBook);
 	rewriteFileData();
-	clearAllInputs(BookNameEdit1, BookAuthorEdit1, CustomBookGenre, BookGenreComboBox);
+	clearAllInputs(BookNameEdit1, BookAuthorEdit1, CustomBookGenre, BookGenreComboBox, BookLenghtEdit1);
 	updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 }
