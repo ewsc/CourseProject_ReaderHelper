@@ -19,6 +19,7 @@
 #include "UserControls.h"
 #include "Edit.h"
 #include "Chart.h"
+#include "AudioStream.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -34,7 +35,8 @@ namespace fs = std::filesystem;
 const string mainFolder = "readerdata";
 const string logFilePath = "logs.readerdata";
 const string userDataPath = "userdata.readerdata";
-const string appVersion = "0.5";
+const string audioStreamsPath = "streampath.readerdata";
+const string appVersion = "0.9";
 
 int rowId;
 
@@ -75,7 +77,8 @@ void fillForm(TEdit *bookName, TEdit *authorName, TEdit *customGenre, TComboBox 
 //AudioStream.cpp
 void __fastcall PlayButtonClick(TObject *Sender);
 void __fastcall PauseButtonClick(TObject *Sender);
-void __fastcall RadioEdit1Change(TObject *Sender);
+void getStreamHistory();
+void setStreamComboBox(TComboBox *comboBox);
 
 TMainForm *MainForm;
 //---------------------------------------------------------------------------
@@ -95,6 +98,8 @@ bool checkFirstLaunch() {
 	else {
 		isFirstLaunch = true;
 		fs::create_directory(mainFolder);
+		ofstream streamDataFile(mainFolder + "\\" + audioStreamsPath);
+        streamDataFile.close();
 	}
 	createLogFile();
 	return isFirstLaunch;
@@ -118,6 +123,8 @@ void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
    bool isFirstLaunch = checkFirstLaunch();
+   getStreamHistory();
+   setStreamComboBox(RadioEdit);
    getUserData();
    setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
    setLogEdit(LogEdit);

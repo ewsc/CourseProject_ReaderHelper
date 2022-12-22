@@ -5722,8 +5722,8 @@ object MainForm: TMainForm
   object SmoothTabPager: TAdvSmoothTabPager
     Left = 0
     Top = 0
-    Width = 500
-    Height = 297
+    Width = 499
+    Height = 298
     DrawTabLine = True
     LineColor = clHighlight
     Fill.Color = clWhite
@@ -5738,7 +5738,8 @@ object MainForm: TMainForm
     Fill.ShadowOffset = 0
     Fill.Glow = gmNone
     Transparent = False
-    ActivePage = AddNewSheet
+    Align = alClient
+    ActivePage = SettingsSheet
     Color = clAppWorkSpace
     Images = MainImageList
     TabPosition = tpBottomCenter
@@ -5748,12 +5749,15 @@ object MainForm: TMainForm
     TabReorder = True
     TabOrder = 0
     UIStyle = tsOffice2019White
+    ExplicitLeft = 8
+    ExplicitWidth = 500
+    ExplicitHeight = 297
     TMSStyle = 24
     object AddNewSheet: TAdvSmoothTabPage
       Left = 1
       Top = 2
-      Width = 498
-      Height = 249
+      Width = 497
+      Height = 250
       Caption = 'Add New'
       ImageIndex = 0
       PageAppearance.Color = clWhite
@@ -5770,7 +5774,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = [fsBold]
+      TabAppearance.Appearance.Font.Style = []
       TabAppearance.Appearance.FocusColor = clHighlight
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
@@ -5896,8 +5900,8 @@ object MainForm: TMainForm
     object ReportSheet: TAdvSmoothTabPage
       Left = 1
       Top = 2
-      Width = 498
-      Height = 249
+      Width = 497
+      Height = 250
       Caption = 'Report'
       ImageIndex = 1
       PageAppearance.Color = clWhite
@@ -5989,8 +5993,8 @@ object MainForm: TMainForm
     object ProgressSheet: TAdvSmoothTabPage
       Left = 1
       Top = 2
-      Width = 498
-      Height = 249
+      Width = 497
+      Height = 250
       Caption = 'Progress'
       ImageIndex = 2
       PageAppearance.Color = clWhite
@@ -6170,8 +6174,8 @@ object MainForm: TMainForm
     object HistorySheet: TAdvSmoothTabPage
       Left = 1
       Top = 2
-      Width = 498
-      Height = 249
+      Width = 497
+      Height = 250
       Caption = 'History'
       ImageIndex = 3
       PageAppearance.Color = clWhite
@@ -6251,8 +6255,8 @@ object MainForm: TMainForm
     object SettingsSheet: TAdvSmoothTabPage
       Left = 1
       Top = 2
-      Width = 498
-      Height = 249
+      Width = 497
+      Height = 250
       Caption = 'Settings'
       ImageIndex = 4
       PageAppearance.Color = clWhite
@@ -6269,7 +6273,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = []
+      TabAppearance.Appearance.Font.Style = [fsBold]
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
       TabAppearance.Appearance.ImageList = MainImageList
@@ -6471,8 +6475,14 @@ object MainForm: TMainForm
         Width = 168
         Height = 22
         TabOrder = 3
+      end
+      object RadioEdit: TComboBox
+        Left = 120
+        Top = 96
+        Width = 168
+        Height = 22
+        TabOrder = 4
         Text = 'https://ssl.hdradios.net:6858/'
-        OnChange = RadioEdit1Change
       end
     end
   end

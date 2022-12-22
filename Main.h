@@ -100,9 +100,9 @@ __published:	// IDE-managed Components
 	TLabel *SettingsLabel1;
 	TLabel *AddNewLabel1;
 	TLabel *HistoryLabel;
-	TEdit *RadioEdit1;
 	TButton *PauseButton;
 	TLabel *SettingsLabel4;
+	TComboBox *RadioEdit;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
@@ -117,7 +117,6 @@ __published:	// IDE-managed Components
 	void __fastcall ProgressButton1Click(TObject *Sender);
 	void __fastcall PlayButtonClick(TObject *Sender);
 	void __fastcall PauseButtonClick(TObject *Sender);
-	void __fastcall RadioEdit1Change(TObject *Sender);
 
 
 private:	// User declarations
