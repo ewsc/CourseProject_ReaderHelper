@@ -39,7 +39,5 @@ object ChartForm: TChartForm
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 0
-    ExplicitLeft = 376
-    ExplicitHeight = 316
   end
 end

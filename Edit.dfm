@@ -5807,12 +5807,4 @@ object EditForm: TEditForm
     TabOrder = 5
     OnClick = DeleteButton1Click
   end
-  object IsFinishedCheckbox: TCheckBox
-    Left = 8
-    Top = 175
-    Width = 140
-    Height = 17
-    Caption = 'Finished Reading'
-    TabOrder = 6
-  end
 end

@@ -50,7 +50,7 @@ void getGenreArray() {
 //
 void drawBars(TImage *Image) {
 	int xAxix = 10;
-	int yAxix = 300;
+	int yAxix = 230;
     Image->Picture = NULL;
 
 	for (int i = 0; i < genreVector.size(); i++) {
@@ -62,6 +62,7 @@ void drawBars(TImage *Image) {
 
 void fillGenreMemo(TMemo *memo) {
 	memo->Clear();
+    memo->Lines->Add("Most read Genres:");
 	for (int i = 0; i < genreVector.size(); i++) {
 		string tempLine = "Genre: " + genreVector[i].genreName + "; Read: " + to_string(genreVector[i].amountRepeated);
         memo->Lines->Add(tempLine.c_str());

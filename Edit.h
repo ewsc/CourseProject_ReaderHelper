@@ -22,7 +22,6 @@ __published:	// IDE-managed Components
 	TLabel *AddNewLabel4;
 	TLabel *AddNewLabel5;
 	TButton *DeleteButton1;
-	TCheckBox *IsFinishedCheckbox;
 	void __fastcall FormActivate(TObject *Sender);
 	void __fastcall DeleteButton1Click(TObject *Sender);
 	void __fastcall EditButton1Click(TObject *Sender);

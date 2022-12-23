@@ -5739,7 +5739,7 @@ object MainForm: TMainForm
     Fill.Glow = gmNone
     Transparent = False
     Align = alClient
-    ActivePage = SettingsSheet
+    ActivePage = ProgressSheet
     Color = clAppWorkSpace
     Images = MainImageList
     TabPosition = tpBottomCenter
@@ -5749,9 +5749,6 @@ object MainForm: TMainForm
     TabReorder = True
     TabOrder = 0
     UIStyle = tsOffice2019White
-    ExplicitLeft = 8
-    ExplicitWidth = 500
-    ExplicitHeight = 297
     TMSStyle = 24
     object AddNewSheet: TAdvSmoothTabPage
       Left = 1
@@ -6011,7 +6008,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = []
+      TabAppearance.Appearance.Font.Style = [fsBold]
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
       TabAppearance.Appearance.ImageList = MainImageList
@@ -6273,7 +6270,7 @@ object MainForm: TMainForm
       TabAppearance.Appearance.Font.Color = 4474440
       TabAppearance.Appearance.Font.Height = -11
       TabAppearance.Appearance.Font.Name = 'Tahoma'
-      TabAppearance.Appearance.Font.Style = [fsBold]
+      TabAppearance.Appearance.Font.Style = []
       TabAppearance.Appearance.SimpleLayout = True
       TabAppearance.Appearance.SimpleLayoutBorder = True
       TabAppearance.Appearance.ImageList = MainImageList
