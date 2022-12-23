@@ -205,7 +205,7 @@ void clearAllInputs(TEdit *BookNameEdit1, TEdit *BookAuthorEdit1, TEdit *CustomB
     BookGenreComboBox->ItemIndex = -1;
 }
 
-void statProgressBarSet(TAdvSmoothProgressBar *bar, TComboBox *cbbox) {
+void statProgressBarSet(TProgressBar *bar, TComboBox *cbbox) {
 	bar->Position = stoi(currProgress(cbbox->ItemIndex));
 }
 
@@ -221,7 +221,7 @@ void enableLoggingButtons(TButton *butt1, TButton *butt2, TComboBox *cbbox) {
 
 void __fastcall TMainForm::BookListChange(TObject *Sender)
 {
-	statProgressBarSet(ReadProgressBar, BookList);
+	statProgressBarSet(ReadProgressBar1, BookList);
 	setPrecentageLabel(ProgressLabel2, BookList);
 	enableLoggingButtons(LogUpButton, LogDownButton, BookList);
 }
@@ -270,7 +270,7 @@ void __fastcall TMainForm::LogUpButtonClick(TObject *Sender)
 		string output = returnStr(LogEdit->Text);
 		userBooks[BookList->ItemIndex].currPage += stoi(output.c_str());
 		setLogEdit(LogEdit);
-		statProgressBarSet(ReadProgressBar, BookList);
+		statProgressBarSet(ReadProgressBar1, BookList);
 
 		if (checkCompletetion(BookList->ItemIndex)) {
 			markAsDone(BookList->ItemIndex);
@@ -290,7 +290,7 @@ void __fastcall TMainForm::LogDownButtonClick(TObject *Sender)
 		string output = returnStr(LogEdit->Text);
 		userBooks[BookList->ItemIndex].currPage -= stoi(output.c_str());
 		setLogEdit(LogEdit);
-		statProgressBarSet(ReadProgressBar, BookList);
+		statProgressBarSet(ReadProgressBar1, BookList);
 		rewriteFileData();
 		setPrecentageLabel(ProgressLabel2, BookList);
 		updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);

@@ -26,6 +26,8 @@
 #pragma link "AdvSmoothProgressBar"
 #pragma link "AdvSmoothTabPager"
 #pragma link "AdvSmoothSlider"
+#pragma link "AdvSmoothSlider"
+#pragma link "AdvSmoothTabPager"
 #pragma resource "*.dfm"
 #pragma comment(lib, "shell32.lib")
 
@@ -107,8 +109,8 @@ bool checkFirstLaunch() {
 
 
 void updateDisplays(TComboBox *genreComboBox, TComboBox *booksComboBox, TStringGrid *historyGrid, TMemo *statMemo, TLabel *label) {
-	string tempBlanckLine = "";
-	setAddNewComboBox(genreComboBox, tempBlanckLine);
+	string tempBlankLine = "";
+	setAddNewComboBox(genreComboBox, tempBlankLine);
 	fillComboBox(booksComboBox);
 	updateStringGrid(historyGrid);
 	setReadingStat(statMemo);
@@ -122,13 +124,13 @@ void setTabsLenght(TPageControl *pControl, int clWidth, int clHeight) {
 
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
-   bool isFirstLaunch = checkFirstLaunch();
-   getStreamHistory();
-   setStreamComboBox(RadioEdit);
-   getUserData();
-   setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
-   setLogEdit(LogEdit);
-   updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
+	bool isFirstLaunch = checkFirstLaunch();
+	getStreamHistory();
+	setStreamComboBox(RadioEdit);
+	getUserData();
+	setStringGrid(HistoryGrid, HistorySheet->ClientWidth, HistoryGrid->ClientWidth, HistorySheet->Height);
+	setLogEdit(LogEdit);
+	updateDisplays(BookGenreComboBox, BookList, HistoryGrid, ReadStatMemo, ReportLabel5);
 }
 
 string returnStr(AnsiString output) {
@@ -173,25 +175,24 @@ void __fastcall TMainForm::aEditItemExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
-
-void __fastcall TMainForm::AdvSmoothSlider1StateChanged(TObject *Sender, TAdvSmoothSliderState State,
-          double Value)
-{
-	if (SmoothTabPager->UIStyle == tsOffice2019White) {
-		SmoothTabPager->UIStyle = tsOffice2019Black;
-		MainForm->Font->Color = clWhite;
-	}
-	else {
-		SmoothTabPager->UIStyle = tsOffice2019White;
-        MainForm->Font->Color = clWindowText;
-    }
-}
-//---------------------------------------------------------------------------
-
 void __fastcall TMainForm::ProgressButton1Click(TObject *Sender)
 {
     ChartForm->ShowModal();
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TMainForm::ThemeButtonClick(TObject *Sender)
+{
+	if (ThemeButton->Caption == "Disabled") {
+		TStyleManager::TrySetStyle("Tablet Dark");
+		ThemeButton->Caption = "Enabled";
+	}
+	else {
+		TStyleManager::TrySetStyle("Tablet Light");
+        ThemeButton->Caption = "Disabled";
+    }
+}
+//---------------------------------------------------------------------------
 

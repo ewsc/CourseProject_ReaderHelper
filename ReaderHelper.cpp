@@ -4,6 +4,8 @@
 #pragma hdrstop
 #include <tchar.h>
 //---------------------------------------------------------------------------
+#include <Vcl.Styles.hpp>
+#include <Vcl.Themes.hpp>
 USEFORM("Main.cpp", MainForm);
 USEFORM("UserControls.cpp", Form3);
 USEFORM("UserData.cpp", Form2);
@@ -18,6 +20,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	{
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
+		TStyleManager::TrySetStyle("Tablet Light");
 		Application->CreateForm(__classid(TMainForm), &MainForm);
 		Application->CreateForm(__classid(TForm1), &Form1);
 		Application->CreateForm(__classid(TForm2), &Form2);

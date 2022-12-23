@@ -86,7 +86,6 @@ __published:	// IDE-managed Components
 	TLabel *ReportLabel4;
 	TLabel *ProgressLabel3;
 	TAdvSmoothTabPage *SettingsSheet;
-	TAdvSmoothSlider *AdvSmoothSlider1;
 	TLabel *SettingsLabel2;
 	TButton *ProgressButton1;
 	TLabel *ProgressLabel4;
@@ -103,6 +102,8 @@ __published:	// IDE-managed Components
 	TButton *PauseButton;
 	TLabel *SettingsLabel4;
 	TComboBox *RadioEdit;
+	TButton *ThemeButton;
+	TProgressBar *ReadProgressBar1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall BookListChange(TObject *Sender);
 	void __fastcall LogUpButtonClick(TObject *Sender);
@@ -112,11 +113,10 @@ __published:	// IDE-managed Components
 	void __fastcall HistoryGridDblClick(TObject *Sender);
 	void __fastcall aDeleteItemExecute(TObject *Sender);
 	void __fastcall aEditItemExecute(TObject *Sender);
-	void __fastcall AdvSmoothSlider1StateChanged(TObject *Sender, TAdvSmoothSliderState State,
-          double Value);
 	void __fastcall ProgressButton1Click(TObject *Sender);
 	void __fastcall PlayButtonClick(TObject *Sender);
 	void __fastcall PauseButtonClick(TObject *Sender);
+	void __fastcall ThemeButtonClick(TObject *Sender);
 
 
 private:	// User declarations
