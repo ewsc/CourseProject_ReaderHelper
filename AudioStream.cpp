@@ -5,6 +5,7 @@
 
 #include "AudioStream.h"
 #include "Main.h"
+#include "Logs.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -13,7 +14,11 @@ using namespace std;
 namespace fs = std::filesystem;
 HSTREAM audiostream;
 
+//Main.cpp
 string returnStr(AnsiString output);
+
+//Logs.cpp
+void addLogLine(string exception);
 
 vector<string> streamHistory;
 
@@ -54,7 +59,7 @@ void setStreamComboBox(TComboBox *comboBox) {
 	for (int i = 0; i < streamHistory.size(); i++) {
 		comboBox->Items->Add(streamHistory[i].c_str());
 	}
-	if (streamHustory.size() > 0) {
+	if (streamHistory.size() > 0) {
 		comboBox->ItemIndex = comboBox->Items->Count - 1;
 	}
 }
@@ -73,10 +78,14 @@ void __fastcall TMainForm::PlayButtonClick(TObject *Sender)
 	string link = returnStr(RadioEdit->Text);
 	BASS_Init(-1, 44100, BASS_DEVICE_3D, 0, NULL);
 	audiostream = BASS_StreamCreateURL(PAnsiChar(link.c_str()), 0, 0, NULL, 0);
-	BASS_ChannelPlay(audiostream, false);
-	decideToAdd(link);
-	setStreamComboBox(RadioEdit);
-	saveStreamData();
+	if (BASS_ChannelPlay(audiostream, false)) {
+		decideToAdd(link);
+		setStreamComboBox(RadioEdit);
+		saveStreamData();
+	}
+	else {
+		addLogLine("Wrong audiostream link.");
+    }
 }
 //---------------------------------------------------------------------------
 

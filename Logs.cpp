@@ -36,6 +36,6 @@ void addLogLine(string exception) {
 	ofstream logFile;
 	logFile.open(mainFolder + "\\" + logFilePath, ios_base::app);
 
-	logFile << "[" << returnCurrTime() << "]" << exception << ";" << endl;
+	logFile << "[" << returnCurrTime() << "] " << exception << ";" << endl;
 	logFile.close();
 }
