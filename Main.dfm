@@ -5743,7 +5743,7 @@ object MainForm: TMainForm
     Fill.Glow = gmNone
     Transparent = False
     Align = alClient
-    ActivePage = ProgressSheet
+    ActivePage = HistorySheet
     Images = MainImageList
     PageMargin = 0
     TabPosition = tpBottomCenter

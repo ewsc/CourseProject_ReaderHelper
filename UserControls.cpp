@@ -175,7 +175,7 @@ void updateStringGrid(TStringGrid *grid) {
 		grid->Cells[1][i+1] = userBooks[i].bookName.c_str();
 		grid->Cells[2][i+1] = userBooks[i].bookAuthor.c_str();
 		grid->Cells[3][i+1] = userBooks[i].genre.c_str();
-		grid->Cells[4][i+1] = currProgress(i).c_str();
+		grid->Cells[4][i+1] = (currProgress(i) + "%").c_str();
         grid->RowCount += 1;
 	}
 }
