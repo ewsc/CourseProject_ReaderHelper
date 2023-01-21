@@ -1,5 +1,6 @@
 * linguist-vendored
 bass/* linguist-vendored
+bass/** linguist-vendored
 *.cpp linguist-vendored=false
 *.c linguist-vendored=true
 *.h linguist-vendored=false
